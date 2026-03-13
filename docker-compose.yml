@@ -1,0 +1,58 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: taskforge_app
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    environment:
+      APP_ENV: local
+      APP_DEBUG: "true"
+      DB_CONNECTION: pgsql
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: taskforge
+      DB_USERNAME: taskforge
+      DB_PASSWORD: taskforge
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      CACHE_STORE: redis
+      QUEUE_CONNECTION: redis
+      SESSION_DRIVER: database
+    depends_on:
+      - postgres
+      - redis
+
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: taskforge_nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - app
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: taskforge_postgres
+    environment:
+      POSTGRES_DB: taskforge
+      POSTGRES_USER: taskforge
+      POSTGRES_PASSWORD: taskforge
+    ports:
+      - "5432:5432"
+    volumes:
+      - taskforge_postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: taskforge_redis
+    ports:
+      - "6379:6379"
+
+volumes:
+  taskforge_postgres_data:
