@@ -31,4 +31,21 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('workspaces/{workspace}/tasks/{task}', [\App\Http\Controllers\Api\V1\Task\TaskController::class, 'show']);
     Route::patch('workspaces/{workspace}/tasks/{task}', [\App\Http\Controllers\Api\V1\Task\TaskController::class, 'update']);
     Route::delete('workspaces/{workspace}/tasks/{task}', [\App\Http\Controllers\Api\V1\Task\TaskController::class, 'destroy']);
+
+    Route::get('workspaces/{workspace}/tasks/{task}/comments', [\App\Http\Controllers\Api\V1\Comment\CommentController::class, 'index']);
+    Route::post('workspaces/{workspace}/tasks/{task}/comments', [\App\Http\Controllers\Api\V1\Comment\CommentController::class, 'store']);
+    Route::patch('workspaces/{workspace}/comments/{comment}', [\App\Http\Controllers\Api\V1\Comment\CommentController::class, 'update']);
+    Route::delete('workspaces/{workspace}/comments/{comment}', [\App\Http\Controllers\Api\V1\Comment\CommentController::class, 'destroy']);
+
+    Route::get('workspaces/{workspace}/labels', [\App\Http\Controllers\Api\V1\Label\LabelController::class, 'index']);
+    Route::post('workspaces/{workspace}/labels', [\App\Http\Controllers\Api\V1\Label\LabelController::class, 'store']);
+    Route::patch('workspaces/{workspace}/labels/{label}', [\App\Http\Controllers\Api\V1\Label\LabelController::class, 'update']);
+    Route::delete('workspaces/{workspace}/labels/{label}', [\App\Http\Controllers\Api\V1\Label\LabelController::class, 'destroy']);
+
+    Route::get('workspaces/{workspace}/invitations', [\App\Http\Controllers\Api\V1\Invitation\InvitationController::class, 'index']);
+    Route::post('workspaces/{workspace}/invitations', [\App\Http\Controllers\Api\V1\Invitation\InvitationController::class, 'store']);
+    Route::delete('workspaces/{workspace}/invitations/{invitation}', [\App\Http\Controllers\Api\V1\Invitation\InvitationController::class, 'destroy']);
+    Route::post('invitations/accept', [\App\Http\Controllers\Api\V1\Invitation\InvitationController::class, 'accept']);
+
+    Route::get('workspaces/{workspace}/activity', [\App\Http\Controllers\Api\V1\Activity\ActivityController::class, 'index']);
 });
