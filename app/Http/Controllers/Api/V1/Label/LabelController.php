@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1\Label;
 
+use App\Events\ActivityOccurred;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\Label\StoreLabelRequest;
 use App\Http\Requests\Api\V1\Label\UpdateLabelRequest;
@@ -34,6 +35,17 @@ class LabelController extends Controller
             'color' => $request->string('color')->toString(),
         ]);
 
+        ActivityOccurred::dispatch(
+            workspaceId: (int) $workspace->getKey(),
+            actorId: (int) $request->user()->getKey(),
+            action: 'label.created',
+            subjectType: Label::class,
+            subjectId: (int) $label->getKey(),
+            context: null,
+            ip: $request->ip(),
+            userAgent: $request->userAgent(),
+        );
+
         return (new LabelResource($label))
             ->response()
             ->setStatusCode(201);
@@ -49,6 +61,17 @@ class LabelController extends Controller
 
         $label->update($request->validated());
 
+        ActivityOccurred::dispatch(
+            workspaceId: (int) $workspace->getKey(),
+            actorId: (int) $request->user()->getKey(),
+            action: 'label.updated',
+            subjectType: Label::class,
+            subjectId: (int) $label->getKey(),
+            context: null,
+            ip: $request->ip(),
+            userAgent: $request->userAgent(),
+        );
+
         return new LabelResource($label);
     }
 
@@ -61,6 +84,17 @@ class LabelController extends Controller
         $this->authorize('delete', $label);
 
         $label->delete();
+
+        ActivityOccurred::dispatch(
+            workspaceId: (int) $workspace->getKey(),
+            actorId: (int) $request->user()->getKey(),
+            action: 'label.deleted',
+            subjectType: Label::class,
+            subjectId: (int) $label->getKey(),
+            context: null,
+            ip: $request->ip(),
+            userAgent: $request->userAgent(),
+        );
 
         return response()->json(null, 204);
     }

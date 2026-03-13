@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1\Comment;
 
+use App\Events\ActivityOccurred;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\Comment\StoreCommentRequest;
 use App\Http\Requests\Api\V1\Comment\UpdateCommentRequest;
@@ -44,6 +45,19 @@ class CommentController extends Controller
             'body' => $request->string('body')->toString(),
         ]);
 
+        ActivityOccurred::dispatch(
+            workspaceId: (int) $workspace->getKey(),
+            actorId: (int) $request->user()->getKey(),
+            action: 'comment.created',
+            subjectType: Comment::class,
+            subjectId: (int) $comment->getKey(),
+            context: [
+                'task_id' => (int) $task->getKey(),
+            ],
+            ip: $request->ip(),
+            userAgent: $request->userAgent(),
+        );
+
         return (new CommentResource($comment->load('author')))
             ->response()
             ->setStatusCode(201);
@@ -62,6 +76,17 @@ class CommentController extends Controller
             'edited_at' => now(),
         ]);
 
+        ActivityOccurred::dispatch(
+            workspaceId: (int) $workspace->getKey(),
+            actorId: (int) $request->user()->getKey(),
+            action: 'comment.updated',
+            subjectType: Comment::class,
+            subjectId: (int) $comment->getKey(),
+            context: null,
+            ip: $request->ip(),
+            userAgent: $request->userAgent(),
+        );
+
         return new CommentResource($comment->fresh()->load('author'));
     }
 
@@ -74,6 +99,17 @@ class CommentController extends Controller
         $this->authorize('delete', $comment);
 
         $comment->delete();
+
+        ActivityOccurred::dispatch(
+            workspaceId: (int) $workspace->getKey(),
+            actorId: (int) $request->user()->getKey(),
+            action: 'comment.deleted',
+            subjectType: Comment::class,
+            subjectId: (int) $comment->getKey(),
+            context: null,
+            ip: $request->ip(),
+            userAgent: $request->userAgent(),
+        );
 
         return response()->json(null, 204);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1\Invitation;
 
+use App\Events\ActivityOccurred;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\Invitation\AcceptInvitationRequest;
 use App\Http\Requests\Api\V1\Invitation\StoreInvitationRequest;
@@ -40,6 +41,17 @@ class InvitationController extends Controller
             'expires_at' => now()->addDays(7),
         ]);
 
+        ActivityOccurred::dispatch(
+            workspaceId: (int) $workspace->getKey(),
+            actorId: (int) $request->user()->getKey(),
+            action: 'invitation.created',
+            subjectType: Invitation::class,
+            subjectId: (int) $invitation->getKey(),
+            context: null,
+            ip: $request->ip(),
+            userAgent: $request->userAgent(),
+        );
+
         return (new InvitationResource($invitation))
             ->response()
             ->setStatusCode(201);
@@ -54,6 +66,17 @@ class InvitationController extends Controller
         $this->authorize('delete', $invitation);
 
         $invitation->delete();
+
+        ActivityOccurred::dispatch(
+            workspaceId: (int) $workspace->getKey(),
+            actorId: (int) $request->user()->getKey(),
+            action: 'invitation.deleted',
+            subjectType: Invitation::class,
+            subjectId: (int) $invitation->getKey(),
+            context: null,
+            ip: $request->ip(),
+            userAgent: $request->userAgent(),
+        );
 
         return response()->json(null, 204);
     }
@@ -87,6 +110,17 @@ class InvitationController extends Controller
 
             return $invitation;
         });
+
+        ActivityOccurred::dispatch(
+            workspaceId: (int) $result->workspace_id,
+            actorId: (int) $user->getKey(),
+            action: 'invitation.accepted',
+            subjectType: Invitation::class,
+            subjectId: (int) $result->getKey(),
+            context: null,
+            ip: $request->ip(),
+            userAgent: $request->userAgent(),
+        );
 
         return new InvitationResource($result);
     }

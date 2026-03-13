@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1\Workspace;
 
+use App\Events\ActivityOccurred;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\Workspace\StoreWorkspaceRequest;
 use App\Http\Requests\Api\V1\Workspace\UpdateWorkspaceRequest;
@@ -35,6 +36,17 @@ class WorkspaceController extends Controller
             'description' => $request->string('description')->toString() ?: null,
         ]);
 
+        ActivityOccurred::dispatch(
+            workspaceId: (int) $workspace->getKey(),
+            actorId: (int) $user->getKey(),
+            action: 'workspace.created',
+            subjectType: Workspace::class,
+            subjectId: (int) $workspace->getKey(),
+            context: null,
+            ip: $request->ip(),
+            userAgent: $request->userAgent(),
+        );
+
         return (new WorkspaceResource($workspace))
             ->response()
             ->setStatusCode(201);
@@ -49,7 +61,20 @@ class WorkspaceController extends Controller
 
     public function update(UpdateWorkspaceRequest $request, Workspace $workspace)
     {
+        $this->authorize('update', $workspace);
+
         $workspace->update($request->validated());
+
+        ActivityOccurred::dispatch(
+            workspaceId: (int) $workspace->getKey(),
+            actorId: (int) $request->user()->getKey(),
+            action: 'workspace.updated',
+            subjectType: Workspace::class,
+            subjectId: (int) $workspace->getKey(),
+            context: null,
+            ip: $request->ip(),
+            userAgent: $request->userAgent(),
+        );
 
         return new WorkspaceResource($workspace);
     }
@@ -59,6 +84,17 @@ class WorkspaceController extends Controller
         $this->authorize('delete', $workspace);
 
         $workspace->delete();
+
+        ActivityOccurred::dispatch(
+            workspaceId: (int) $workspace->getKey(),
+            actorId: (int) $request->user()->getKey(),
+            action: 'workspace.deleted',
+            subjectType: Workspace::class,
+            subjectId: (int) $workspace->getKey(),
+            context: null,
+            ip: $request->ip(),
+            userAgent: $request->userAgent(),
+        );
 
         return response()->json(null, 204);
     }

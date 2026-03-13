@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1\Task;
 
+use App\Events\ActivityOccurred;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\Task\StoreTaskRequest;
 use App\Http\Requests\Api\V1\Task\UpdateTaskRequest;
@@ -58,6 +59,20 @@ class TaskController extends Controller
             ]);
         });
 
+        ActivityOccurred::dispatch(
+            workspaceId: (int) $workspace->getKey(),
+            actorId: (int) $request->user()->getKey(),
+            action: 'task.created',
+            subjectType: Task::class,
+            subjectId: (int) $task->getKey(),
+            context: [
+                'project_id' => (int) $project->getKey(),
+                'number' => (int) $task->number,
+            ],
+            ip: $request->ip(),
+            userAgent: $request->userAgent(),
+        );
+
         return (new TaskResource($task))
             ->response()
             ->setStatusCode(201);
@@ -84,6 +99,17 @@ class TaskController extends Controller
 
         $task->update($request->validated());
 
+        ActivityOccurred::dispatch(
+            workspaceId: (int) $workspace->getKey(),
+            actorId: (int) $request->user()->getKey(),
+            action: 'task.updated',
+            subjectType: Task::class,
+            subjectId: (int) $task->getKey(),
+            context: null,
+            ip: $request->ip(),
+            userAgent: $request->userAgent(),
+        );
+
         return new TaskResource($task);
     }
 
@@ -96,6 +122,17 @@ class TaskController extends Controller
         $this->authorize('delete', $task);
 
         $task->delete();
+
+        ActivityOccurred::dispatch(
+            workspaceId: (int) $workspace->getKey(),
+            actorId: (int) $request->user()->getKey(),
+            action: 'task.deleted',
+            subjectType: Task::class,
+            subjectId: (int) $task->getKey(),
+            context: null,
+            ip: $request->ip(),
+            userAgent: $request->userAgent(),
+        );
 
         return response()->json(null, 204);
     }
