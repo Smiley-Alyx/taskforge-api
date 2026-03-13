@@ -1,66 +1,117 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# TaskForge API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Production-like REST API backend for task and project management (simplified Jira / Linear / Trello).
 
-## About Laravel
+## Status
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- [x] Laravel 11 project initialized
+- [x] Docker development stack (nginx + php-fpm + postgres + redis)
+- [x] Auth via Laravel Sanctum (token-based)
+- [x] API versioning: `/api/v1/...`
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tech Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP 8.3
+- Laravel 11
+- PostgreSQL
+- Redis
+- Docker (nginx + php-fpm)
+- Laravel Sanctum
+- PHPUnit
+- OpenAPI / Swagger (planned)
+- GitHub Actions (planned)
 
-## Learning Laravel
+## Architecture
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+High-level layering:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **HTTP layer**: Controllers + FormRequests + API Resources
+- **Application layer**: Actions + DTOs (use-cases)
+- **Domain layer**: Eloquent Models + Enums + Policies (RBAC)
+- **Infrastructure**: PostgreSQL/Redis, Events/Listeners/Jobs, queues
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Key decisions:
 
-## Laravel Sponsors
+- Workspace-scoped routes: `/api/v1/workspaces/{workspace}/...`
+- Policy-first authorization for RBAC (`owner/admin/member/viewer`)
+- Activity Log as first-class feature (domain events -> activity records)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## API
 
-### Premium Partners
+Current endpoints:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+- `POST /api/v1/auth/register`
+- `POST /api/v1/auth/login`
+- `GET  /api/v1/auth/me` (requires `auth:sanctum`)
+- `POST /api/v1/auth/logout` (requires `auth:sanctum`)
 
-## Contributing
+## Getting Started
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Requirements
 
-## Code of Conduct
+- Docker Engine + Docker Compose
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Setup
 
-## Security Vulnerabilities
+1. Create `.env` from `.env.example`.
+2. Build and start containers:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+   ```bash
+   sudo docker compose up -d --build
+   ```
 
-## License
+3. Run migrations:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+   ```bash
+   sudo docker compose exec -T app php artisan migrate --force
+   ```
+
+4. Open:
+
+- API base URL: `http://localhost:8080/api/v1`
+
+## Docker Setup
+
+Services:
+
+- `nginx` (port `8080`)
+- `app` (PHP-FPM 8.3)
+- `postgres` (port `5432`)
+- `redis` (port `6379`)
+
+## Tests
+
+Run tests:
+
+```bash
+sudo docker compose exec -T app php artisan test
+```
+
+## CI (GitHub Actions)
+
+Planned pipeline:
+
+- Install dependencies (composer)
+- Run tests (PHPUnit)
+- (Optional) Code style (Laravel Pint)
+- (Optional) Static analysis (PHPStan/Larastan)
+
+## Screenshots
+
+Placeholders (will be added):
+
+- Swagger UI
+- Example API responses
+
+## Roadmap
+
+- [x] Project bootstrap (Laravel 11)
+- [x] Docker environment (nginx + php-fpm + postgres + redis)
+- [x] Sanctum auth (register/login/me/logout)
+- [ ] Domain model + migrations: Workspace, Project, Task, Comment, Label, Invitation, ActivityLog, WorkspaceMember
+- [ ] RBAC (Policies): `owner/admin/member/viewer`
+- [ ] REST endpoints: Workspaces, Projects, Tasks, Comments, Labels, Invitations, Activity
+- [ ] Activity Log system (events -> activity)
+- [ ] OpenAPI/Swagger
+- [ ] GitHub Actions CI
+- [ ] README screenshots
