@@ -13,6 +13,8 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('activity', [\App\Http\Controllers\Api\V1\Activity\ActivityController::class, 'globalIndex']);
+
     Route::apiResource('workspaces', \App\Http\Controllers\Api\V1\Workspace\WorkspaceController::class)
         ->only(['index', 'store', 'show', 'update', 'destroy']);
 

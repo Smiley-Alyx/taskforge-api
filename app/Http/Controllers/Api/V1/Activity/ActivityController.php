@@ -10,6 +10,20 @@ use Illuminate\Http\Request;
 
 class ActivityController extends Controller
 {
+    public function globalIndex(Request $request)
+    {
+        $validated = $request->validate([
+            'workspace_id' => ['required', 'integer', 'exists:workspaces,id'],
+            'action' => ['sometimes', 'string'],
+            'actor_id' => ['sometimes', 'integer'],
+        ]);
+
+        /** @var Workspace $workspace */
+        $workspace = Workspace::query()->findOrFail((int) $validated['workspace_id']);
+
+        return $this->index($request, $workspace);
+    }
+
     public function index(Request $request, Workspace $workspace)
     {
         $this->authorize('view', $workspace);
