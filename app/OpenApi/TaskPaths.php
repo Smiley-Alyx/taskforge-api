@@ -16,6 +16,7 @@ use OpenApi\Attributes as OA;
         new OA\Parameter(name: 'status', in: 'query', required: false, schema: new OA\Schema(type: 'string')),
         new OA\Parameter(name: 'priority', in: 'query', required: false, schema: new OA\Schema(type: 'string')),
         new OA\Parameter(name: 'assignee_id', in: 'query', required: false, schema: new OA\Schema(type: 'integer')),
+        new OA\Parameter(name: 'due_date', in: 'query', required: false, schema: new OA\Schema(type: 'string', format: 'date')),
         new OA\Parameter(name: 'due_from', in: 'query', required: false, schema: new OA\Schema(type: 'string', format: 'date')),
         new OA\Parameter(name: 'due_to', in: 'query', required: false, schema: new OA\Schema(type: 'string', format: 'date')),
         new OA\Parameter(name: 'sort', in: 'query', required: false, schema: new OA\Schema(type: 'string')),

@@ -39,6 +39,10 @@ class TaskController extends Controller
             $query->where('assignee_id', (int) $request->input('assignee_id'));
         }
 
+        if ($request->filled('due_date') && ! $request->filled('due_from') && ! $request->filled('due_to')) {
+            $query->whereDate('due_at', '=', $request->date('due_date')->toDateString());
+        }
+
         if ($request->filled('due_from')) {
             $query->where('due_at', '>=', $request->date('due_from')->toDateTimeString());
         }
