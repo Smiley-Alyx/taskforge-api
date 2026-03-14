@@ -18,8 +18,8 @@ Production-like REST API backend for task and project management (simplified Jir
 - Docker (nginx + php-fpm)
 - Laravel Sanctum
 - PHPUnit
-- OpenAPI / Swagger (planned)
-- GitHub Actions (planned)
+- OpenAPI / Swagger
+- GitHub Actions
 
 ## Architecture
 
@@ -44,6 +44,10 @@ Current endpoints:
 - `POST /api/v1/auth/login`
 - `GET  /api/v1/auth/me` (requires `auth:sanctum`)
 - `POST /api/v1/auth/logout` (requires `auth:sanctum`)
+
+Swagger UI:
+
+- `GET /api/docs`
 
 ## Getting Started
 
@@ -89,12 +93,11 @@ sudo docker compose exec -T app php artisan test
 
 ## CI (GitHub Actions)
 
-Planned pipeline:
+Pipeline:
 
 - Install dependencies (composer)
+- Run migrations
 - Run tests (PHPUnit)
-- (Optional) Code style (Laravel Pint)
-- (Optional) Static analysis (PHPStan/Larastan)
 
 ## Screenshots
 
@@ -108,10 +111,10 @@ Placeholders (will be added):
 - [x] Project bootstrap (Laravel 11)
 - [x] Docker environment (nginx + php-fpm + postgres + redis)
 - [x] Sanctum auth (register/login/me/logout)
-- [ ] Domain model + migrations: Workspace, Project, Task, Comment, Label, Invitation, ActivityLog, WorkspaceMember
-- [ ] RBAC (Policies): `owner/admin/member/viewer`
-- [ ] REST endpoints: Workspaces, Projects, Tasks, Comments, Labels, Invitations, Activity
-- [ ] Activity Log system (events -> activity)
-- [ ] OpenAPI/Swagger
-- [ ] GitHub Actions CI
+- [x] Domain model + migrations: Workspace, Project, Task, Comment, Label, Invitation, ActivityLog, WorkspaceMember
+- [x] RBAC (Policies): `owner/admin/member/viewer`
+- [x] REST endpoints: Workspaces, Projects, Tasks, Comments, Labels, Invitations, Activity
+- [x] Activity Log system (events -> activity)
+- [x] OpenAPI/Swagger
+- [x] GitHub Actions CI
 - [ ] README screenshots
