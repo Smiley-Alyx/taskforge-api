@@ -108,7 +108,7 @@ Placeholders (will be added):
 
 ### Swagger UI
 
-![Swagger UI](docs/screenshots/swagger-ui.png)
+![Swagger UI](docs/screenshots/swagger-ui.jpeg)
 
 ## Roadmap
 
