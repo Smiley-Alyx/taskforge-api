@@ -17,6 +17,7 @@ class InvitationResource extends JsonResource
             'token' => $this->resource->token,
             'invited_by' => $this->resource->invited_by,
             'accepted_at' => $this->resource->accepted_at?->toISOString(),
+            'declined_at' => $this->resource->declined_at?->toISOString(),
             'expires_at' => $this->resource->expires_at?->toISOString(),
             'created_at' => $this->resource->created_at?->toISOString(),
             'updated_at' => $this->resource->updated_at?->toISOString(),

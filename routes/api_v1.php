@@ -17,6 +17,7 @@ Route::middleware('auth:sanctum')->group(function () {
         ->only(['index', 'store', 'show', 'update', 'destroy']);
 
     Route::get('workspaces/{workspace}/members', [\App\Http\Controllers\Api\V1\Workspace\WorkspaceMemberController::class, 'index']);
+    Route::patch('workspaces/{workspace}/members/{member}', [\App\Http\Controllers\Api\V1\Workspace\WorkspaceMemberController::class, 'update']);
 
     Route::get('workspaces/{workspace}/projects', [\App\Http\Controllers\Api\V1\Project\ProjectController::class, 'index']);
     Route::post('workspaces/{workspace}/projects', [\App\Http\Controllers\Api\V1\Project\ProjectController::class, 'store']);
@@ -47,6 +48,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('workspaces/{workspace}/invitations', [\App\Http\Controllers\Api\V1\Invitation\InvitationController::class, 'store']);
     Route::delete('workspaces/{workspace}/invitations/{invitation}', [\App\Http\Controllers\Api\V1\Invitation\InvitationController::class, 'destroy']);
     Route::post('invitations/accept', [\App\Http\Controllers\Api\V1\Invitation\InvitationController::class, 'accept']);
+    Route::post('invitations/{token}/accept', [\App\Http\Controllers\Api\V1\Invitation\InvitationController::class, 'acceptByToken']);
+    Route::post('invitations/{token}/decline', [\App\Http\Controllers\Api\V1\Invitation\InvitationController::class, 'declineByToken']);
 
     Route::get('workspaces/{workspace}/activity', [\App\Http\Controllers\Api\V1\Activity\ActivityController::class, 'index']);
 });

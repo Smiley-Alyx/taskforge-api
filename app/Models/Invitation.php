@@ -14,11 +14,13 @@ class Invitation extends Model
         'token',
         'invited_by',
         'accepted_at',
+        'declined_at',
         'expires_at',
     ];
 
     protected $casts = [
         'accepted_at' => 'datetime',
+        'declined_at' => 'datetime',
         'expires_at' => 'datetime',
     ];
 

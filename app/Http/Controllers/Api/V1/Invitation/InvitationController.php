@@ -84,16 +84,45 @@ class InvitationController extends Controller
     public function accept(AcceptInvitationRequest $request)
     {
         $user = $request->user();
+        $token = $request->string('token')->toString();
 
-        $result = DB::transaction(function () use ($request, $user) {
+        $result = $this->acceptToken($request, $token);
+
+        return new InvitationResource($result);
+    }
+
+    public function acceptByToken(Request $request, string $token)
+    {
+        if ($request->user() === null) {
+            abort(401);
+        }
+
+        $request->validate([
+            'token' => ['string', 'max:255'],
+        ]);
+
+        $result = $this->acceptToken($request, $token);
+
+        return new InvitationResource($result);
+    }
+
+    private function acceptToken(Request $request, string $token): Invitation
+    {
+        $user = $request->user();
+
+        $result = DB::transaction(function () use ($token, $user) {
             /** @var Invitation $invitation */
             $invitation = Invitation::query()
-                ->where('token', $request->string('token')->toString())
+                ->where('token', $token)
                 ->lockForUpdate()
                 ->firstOrFail();
 
-            if ($invitation->accepted_at !== null || $invitation->expires_at->isPast()) {
+            if ($invitation->accepted_at !== null || $invitation->declined_at !== null || $invitation->expires_at->isPast()) {
                 abort(422);
+            }
+
+            if (mb_strtolower($invitation->email) !== mb_strtolower((string) $user->email)) {
+                abort(403);
             }
 
             WorkspaceMember::query()->firstOrCreate([
@@ -115,6 +144,50 @@ class InvitationController extends Controller
             (int) $result->workspace_id,
             (int) $user->getKey(),
             'invitation.accepted',
+            Invitation::class,
+            (int) $result->getKey(),
+            null,
+            $request->ip(),
+            $request->userAgent(),
+        );
+
+        return $result;
+    }
+
+    public function declineByToken(Request $request, string $token)
+    {
+        $user = $request->user();
+
+        if ($user === null) {
+            abort(401);
+        }
+
+        $result = DB::transaction(function () use ($token, $user) {
+            /** @var Invitation $invitation */
+            $invitation = Invitation::query()
+                ->where('token', $token)
+                ->lockForUpdate()
+                ->firstOrFail();
+
+            if ($invitation->accepted_at !== null || $invitation->declined_at !== null || $invitation->expires_at->isPast()) {
+                abort(422);
+            }
+
+            if (mb_strtolower($invitation->email) !== mb_strtolower((string) $user->email)) {
+                abort(403);
+            }
+
+            $invitation->update([
+                'declined_at' => now(),
+            ]);
+
+            return $invitation;
+        });
+
+        ActivityOccurred::dispatch(
+            (int) $result->workspace_id,
+            (int) $user->getKey(),
+            'invitation.declined',
             Invitation::class,
             (int) $result->getKey(),
             null,
