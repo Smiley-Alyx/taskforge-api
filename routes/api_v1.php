@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('workspaces/{workspace}/projects/{project}/tasks', [\App\Http\Controllers\Api\V1\Task\TaskController::class, 'index']);
     Route::post('workspaces/{workspace}/projects/{project}/tasks', [\App\Http\Controllers\Api\V1\Task\TaskController::class, 'store']);
+    Route::patch('workspaces/{workspace}/tasks/bulk', [\App\Http\Controllers\Api\V1\Task\TaskController::class, 'bulkUpdate']);
     Route::get('workspaces/{workspace}/tasks/{task}', [\App\Http\Controllers\Api\V1\Task\TaskController::class, 'show']);
     Route::patch('workspaces/{workspace}/tasks/{task}', [\App\Http\Controllers\Api\V1\Task\TaskController::class, 'update']);
     Route::delete('workspaces/{workspace}/tasks/{task}', [\App\Http\Controllers\Api\V1\Task\TaskController::class, 'destroy']);
