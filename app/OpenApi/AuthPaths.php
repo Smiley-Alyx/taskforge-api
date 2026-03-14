@@ -4,9 +4,6 @@ namespace App\OpenApi;
 
 use OpenApi\Attributes as OA;
 
-#[OA\PathItem(
-    path: '/api/v1/auth/login'
-)]
 #[OA\Post(
     path: '/api/v1/auth/login',
     operationId: 'authLogin',
