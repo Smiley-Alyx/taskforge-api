@@ -106,6 +106,10 @@ Placeholders (will be added):
 - Swagger UI
 - Example API responses
 
+### Swagger UI
+
+![Swagger UI](docs/screenshots/swagger-ui.png)
+
 ## Roadmap
 
 - [x] Project bootstrap (Laravel 11)
