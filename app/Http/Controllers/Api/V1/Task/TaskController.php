@@ -94,7 +94,7 @@ class TaskController extends Controller
             abort(404);
         }
 
-        $this->authorize('update', $project);
+        $this->authorize('createTask', $project);
 
         $task = DB::transaction(function () use ($request, $workspace, $project) {
             $nextNumber = (int) (Task::query()

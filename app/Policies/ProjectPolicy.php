@@ -14,6 +14,13 @@ class ProjectPolicy
     ) {
     }
 
+    public function createTask(User $user, Project $project): bool
+    {
+        $role = $this->roles->resolve($user, $project->workspace);
+
+        return $role?->atLeast(WorkspaceRole::Member) ?? false;
+    }
+
     /**
      * Determine whether the user can view any models.
      */
