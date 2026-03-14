@@ -34,6 +34,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('workspaces/{workspace}/tasks/{task}', [\App\Http\Controllers\Api\V1\Task\TaskController::class, 'update']);
     Route::delete('workspaces/{workspace}/tasks/{task}', [\App\Http\Controllers\Api\V1\Task\TaskController::class, 'destroy']);
 
+    Route::post('workspaces/{workspace}/tasks/{task}/labels', [\App\Http\Controllers\Api\V1\Task\TaskLabelController::class, 'store']);
+    Route::delete('workspaces/{workspace}/tasks/{task}/labels/{label}', [\App\Http\Controllers\Api\V1\Task\TaskLabelController::class, 'destroy']);
+
     Route::get('workspaces/{workspace}/tasks/{task}/comments', [\App\Http\Controllers\Api\V1\Comment\CommentController::class, 'index']);
     Route::post('workspaces/{workspace}/tasks/{task}/comments', [\App\Http\Controllers\Api\V1\Comment\CommentController::class, 'store']);
     Route::patch('workspaces/{workspace}/comments/{comment}', [\App\Http\Controllers\Api\V1\Comment\CommentController::class, 'update']);
