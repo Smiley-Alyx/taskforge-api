@@ -1,51 +1,65 @@
 # TaskForge API
 
-Production-like REST API backend for task and project management (simplified Jira / Linear / Trello).
+Production-like REST API backend for multi-workspace task management (a simplified Jira/Linear-style backend). Built as a portfolio project with clean Laravel conventions, RBAC, audit trail, test coverage, Docker-first setup and OpenAPI.
 
-## Status
+## Features
 
-- [x] Laravel 11 project initialized
-- [x] Docker development stack (nginx + php-fpm + postgres + redis)
-- [x] Auth via Laravel Sanctum (token-based)
-- [x] API versioning: `/api/v1/...`
+- Multi-workspace model (Workspace → Projects → Tasks)
+- Tasks with filtering, sorting, pagination and bulk update
+- Labels (CRUD) + many-to-many labels on tasks (attach/detach)
+- Comments (CRUD) with author/admin rules
+- Invitations (create, accept/decline by token) with `declined_at`
+- Role-based access control: `owner / admin / member / viewer`
+- Activity log (domain events → persisted audit log)
+- OpenAPI/Swagger docs
 
 ## Tech Stack
 
 - PHP 8.3
 - Laravel 11
-- PostgreSQL
-- Redis
+- PostgreSQL 16
+- Redis 7
 - Docker (nginx + php-fpm)
 - Laravel Sanctum
-- PHPUnit
-- OpenAPI / Swagger
-- GitHub Actions
+- PHPUnit Feature Tests
+- L5 Swagger (swagger-php attributes)
+- GitHub Actions CI
 
-## Architecture
+## Quickstart (Docker)
 
-High-level layering:
+```bash
+sudo docker compose up -d --build
+sudo docker compose exec -T app php artisan migrate --force
+sudo docker compose exec -T app php artisan l5-swagger:generate
+```
 
-- **HTTP layer**: Controllers + FormRequests + API Resources
-- **Application layer**: Actions + DTOs (use-cases)
-- **Domain layer**: Eloquent Models + Enums + Policies (RBAC)
-- **Infrastructure**: PostgreSQL/Redis, Events/Listeners/Jobs, queues
+Open:
 
-Key decisions:
+- API base URL: `http://localhost:8080/api/v1`
+- Swagger UI: `http://localhost:8080/api/docs`
+- OpenAPI JSON: `http://localhost:8080/docs?api-docs.json`
 
-- Workspace-scoped routes: `/api/v1/workspaces/{workspace}/...`
-- Policy-first authorization for RBAC (`owner/admin/member/viewer`)
-- Activity Log as first-class feature (domain events -> activity records)
+## Architecture (high level)
 
-## API
+- **Controllers**: orchestration (authz, request → service → resource)
+- **Form Requests**: validation + auth where appropriate
+- **Policies + WorkspaceRoleResolver**: RBAC and isolation by workspace
+- **API Resources**: consistent JSON shape
+- **Services**:
+  - `WorkspaceRoleResolver` — resolves role in a workspace
+  - `TaskIndexQuery` — query builder for tasks index filters/sort/pagination
+- **Activity Log pipeline**: `ActivityOccurred` → listener/job → `activity_logs`
 
-Current endpoints:
+## API highlights
+
+Auth:
 
 - `POST /api/v1/auth/register`
 - `POST /api/v1/auth/login`
-- `GET  /api/v1/auth/me` (requires `auth:sanctum`)
-- `POST /api/v1/auth/logout` (requires `auth:sanctum`)
+- `GET  /api/v1/auth/me`
+- `POST /api/v1/auth/logout`
 
-Workspace-scoped endpoints (selected):
+Workspaces:
 
 - `GET    /api/v1/workspaces`
 - `POST   /api/v1/workspaces`
@@ -53,24 +67,42 @@ Workspace-scoped endpoints (selected):
 - `PATCH  /api/v1/workspaces/{workspace}`
 - `DELETE /api/v1/workspaces/{workspace}`
 
-- `GET   /api/v1/workspaces/{workspace}/projects`
-- `POST  /api/v1/workspaces/{workspace}/projects`
-- `GET   /api/v1/workspaces/{workspace}/projects/{project}`
+Projects:
 
-- `GET   /api/v1/workspaces/{workspace}/projects/{project}/tasks` (filtering/sorting/pagination)
-- `POST  /api/v1/workspaces/{workspace}/projects/{project}/tasks`
-- `PATCH /api/v1/workspaces/{workspace}/tasks/bulk`
-- `GET   /api/v1/workspaces/{workspace}/tasks/{task}`
+- `GET    /api/v1/workspaces/{workspace}/projects`
+- `POST   /api/v1/workspaces/{workspace}/projects`
+- `GET    /api/v1/workspaces/{workspace}/projects/{project}`
+- `PATCH  /api/v1/workspaces/{workspace}/projects/{project}`
+- `DELETE /api/v1/workspaces/{workspace}/projects/{project}`
 
-- `POST   /api/v1/workspaces/{workspace}/tasks/{task}/labels`
-- `DELETE /api/v1/workspaces/{workspace}/tasks/{task}/labels/{label}`
+Tasks:
 
-- `GET   /api/v1/workspaces/{workspace}/tasks/{task}/comments`
-- `POST  /api/v1/workspaces/{workspace}/tasks/{task}/comments`
-- `PATCH /api/v1/workspaces/{workspace}/comments/{comment}`
+- `GET    /api/v1/workspaces/{workspace}/projects/{project}/tasks`
+  - filters: `status`, `priority`, `assignee_id`, `due_date` (alias), `due_from`, `due_to`
+  - sorting: `sort=id,-id,priority,...`
+  - pagination: `per_page`
+- `POST   /api/v1/workspaces/{workspace}/projects/{project}/tasks`
+- `PATCH  /api/v1/workspaces/{workspace}/tasks/{task}`
+- `DELETE /api/v1/workspaces/{workspace}/tasks/{task}`
+- `PATCH  /api/v1/workspaces/{workspace}/tasks/bulk`
 
-- `GET   /api/v1/workspaces/{workspace}/members`
-- `PATCH /api/v1/workspaces/{workspace}/members/{member}` (role change)
+Comments:
+
+- `GET    /api/v1/workspaces/{workspace}/tasks/{task}/comments`
+- `POST   /api/v1/workspaces/{workspace}/tasks/{task}/comments`
+- `PATCH  /api/v1/workspaces/{workspace}/comments/{comment}`
+- `DELETE /api/v1/workspaces/{workspace}/comments/{comment}`
+
+Labels:
+
+- `GET    /api/v1/workspaces/{workspace}/labels`
+- `POST   /api/v1/workspaces/{workspace}/labels`
+- `PATCH  /api/v1/workspaces/{workspace}/labels/{label}`
+- `DELETE /api/v1/workspaces/{workspace}/labels/{label}`
+- `POST   /api/v1/workspaces/{workspace}/tasks/{task}/labels` (attach)
+- `DELETE /api/v1/workspaces/{workspace}/tasks/{task}/labels/{label}` (detach)
+
+Invitations:
 
 - `GET    /api/v1/workspaces/{workspace}/invitations`
 - `POST   /api/v1/workspaces/{workspace}/invitations`
@@ -78,134 +110,58 @@ Workspace-scoped endpoints (selected):
 - `POST   /api/v1/invitations/{token}/accept`
 - `POST   /api/v1/invitations/{token}/decline`
 
-- `GET   /api/v1/workspaces/{workspace}/activity`
+Activity Log:
 
-Swagger UI:
+- `GET /api/v1/workspaces/{workspace}/activity`
+- `GET /api/v1/activity?workspace_id=...`
 
-- `GET /api/docs`
-- OpenAPI JSON: `GET /docs?api-docs.json`
+## RBAC
 
-## Getting Started
+- **Owner**: full control (including workspace delete)
+- **Admin**: manage workspace settings, projects, members, invitations, bulk actions
+- **Member**: work on tasks (create/update/delete), comments
+- **Viewer**: read-only access
 
-### Requirements
+## ERD (text)
 
-- Docker Engine + Docker Compose
-
-### Setup
-
-1. Create `.env` from `.env.example`.
-2. Build and start containers:
-
-   ```bash
-   sudo docker compose up -d --build
-   ```
-
-3. Run migrations:
-
-   ```bash
-   sudo docker compose exec -T app php artisan migrate --force
-   ```
-
-4. Generate Swagger docs (optional):
-
-   ```bash
-   sudo docker compose exec -T app php artisan l5-swagger:generate
-   ```
-
-5. Open:
-
-- API base URL: `http://localhost:8080/api/v1`
-- Swagger UI: `http://localhost:8080/api/docs`
-
-## Docker Setup
-
-Services:
-
-- `nginx` (port `8080`)
-- `app` (PHP-FPM 8.3)
-- `postgres` (port `5432`)
-- `redis` (port `6379`)
+- `workspaces` 1—N `projects`
+- `projects` 1—N `tasks`
+- `tasks` 1—N `comments`
+- `workspaces` 1—N `labels`
+- `tasks` N—M `labels` via `label_task`
+- `workspaces` 1—N `workspace_members`
+- `workspaces` 1—N `invitations`
+- `workspaces` 1—N `activity_logs`
 
 ## Tests
-
-Run tests:
 
 ```bash
 sudo docker compose exec -T app php artisan test
 ```
 
-## Formatting (Pint)
-
-Check code style:
+## Code style
 
 ```bash
 ./vendor/bin/pint --test
 ```
 
-## CI (GitHub Actions)
+## CI
 
-Pipeline:
+GitHub Actions pipeline runs:
 
-- Install dependencies (composer)
-- Run Pint (style check)
-- Run migrations
-- Run tests (PHPUnit)
-
-## Examples (curl)
-
-Login:
-
-```bash
-curl -sS -X POST http://localhost:8080/api/v1/auth/login \
-  -H 'Content-Type: application/json' \
-  -d '{"email":"demo@example.com","password":"password"}'
-```
-
-Create workspace (replace `TOKEN`):
-
-```bash
-curl -sS -X POST http://localhost:8080/api/v1/workspaces \
-  -H 'Authorization: Bearer TOKEN' \
-  -H 'Content-Type: application/json' \
-  -d '{"name":"My Workspace","slug":"my-workspace"}'
-```
-
-List tasks with filters:
-
-```bash
-curl -sS "http://localhost:8080/api/v1/workspaces/1/projects/1/tasks?status=todo&sort=-id&per_page=20" \
-  -H 'Authorization: Bearer TOKEN'
-```
-
-Attach labels to task:
-
-```bash
-curl -sS -X POST http://localhost:8080/api/v1/workspaces/1/tasks/1/labels \
-  -H 'Authorization: Bearer TOKEN' \
-  -H 'Content-Type: application/json' \
-  -d '{"label_ids":[1,2]}'
-```
+- Pint (`pint --test`)
+- DB migrations
+- Feature tests (`php artisan test`)
 
 ## Screenshots
-
-Placeholders (will be added):
-
-- Swagger UI
-- Example API responses
 
 ### Swagger UI
 
 ![Swagger UI](docs/screenshots/swagger-ui.jpeg)
 
-## Roadmap
+## Future improvements
 
-- [x] Project bootstrap (Laravel 11)
-- [x] Docker environment (nginx + php-fpm + postgres + redis)
-- [x] Sanctum auth (register/login/me/logout)
-- [x] Domain model + migrations: Workspace, Project, Task, Comment, Label, Invitation, ActivityLog, WorkspaceMember
-- [x] RBAC (Policies): `owner/admin/member/viewer`
-- [x] REST endpoints: Workspaces, Projects, Tasks, Comments, Labels, Invitations, Activity
-- [x] Activity Log system (events -> activity)
-- [x] OpenAPI/Swagger
-- [x] GitHub Actions CI
-- [ ] README screenshots
+- Export OpenAPI schemas for response bodies (full DTO-level schemas)
+- Add seeders for demo workspace/project/tasks
+- Add additional task filters (e.g. full-text search)
+- Add rate limiting and request IDs for tracing
