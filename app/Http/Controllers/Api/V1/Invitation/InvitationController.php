@@ -42,14 +42,14 @@ class InvitationController extends Controller
         ]);
 
         ActivityOccurred::dispatch(
-            workspaceId: (int) $workspace->getKey(),
-            actorId: (int) $request->user()->getKey(),
-            action: 'invitation.created',
-            subjectType: Invitation::class,
-            subjectId: (int) $invitation->getKey(),
-            context: null,
-            ip: $request->ip(),
-            userAgent: $request->userAgent(),
+            (int) $workspace->getKey(),
+            (int) $request->user()->getKey(),
+            'invitation.created',
+            Invitation::class,
+            (int) $invitation->getKey(),
+            null,
+            $request->ip(),
+            $request->userAgent(),
         );
 
         return (new InvitationResource($invitation))
@@ -68,14 +68,14 @@ class InvitationController extends Controller
         $invitation->delete();
 
         ActivityOccurred::dispatch(
-            workspaceId: (int) $workspace->getKey(),
-            actorId: (int) $request->user()->getKey(),
-            action: 'invitation.deleted',
-            subjectType: Invitation::class,
-            subjectId: (int) $invitation->getKey(),
-            context: null,
-            ip: $request->ip(),
-            userAgent: $request->userAgent(),
+            (int) $workspace->getKey(),
+            (int) $request->user()->getKey(),
+            'invitation.deleted',
+            Invitation::class,
+            (int) $invitation->getKey(),
+            null,
+            $request->ip(),
+            $request->userAgent(),
         );
 
         return response()->json(null, 204);
@@ -112,14 +112,14 @@ class InvitationController extends Controller
         });
 
         ActivityOccurred::dispatch(
-            workspaceId: (int) $result->workspace_id,
-            actorId: (int) $user->getKey(),
-            action: 'invitation.accepted',
-            subjectType: Invitation::class,
-            subjectId: (int) $result->getKey(),
-            context: null,
-            ip: $request->ip(),
-            userAgent: $request->userAgent(),
+            (int) $result->workspace_id,
+            (int) $user->getKey(),
+            'invitation.accepted',
+            Invitation::class,
+            (int) $result->getKey(),
+            null,
+            $request->ip(),
+            $request->userAgent(),
         );
 
         return new InvitationResource($result);

@@ -46,16 +46,16 @@ class CommentController extends Controller
         ]);
 
         ActivityOccurred::dispatch(
-            workspaceId: (int) $workspace->getKey(),
-            actorId: (int) $request->user()->getKey(),
-            action: 'comment.created',
-            subjectType: Comment::class,
-            subjectId: (int) $comment->getKey(),
-            context: [
+            (int) $workspace->getKey(),
+            (int) $request->user()->getKey(),
+            'comment.created',
+            Comment::class,
+            (int) $comment->getKey(),
+            [
                 'task_id' => (int) $task->getKey(),
             ],
-            ip: $request->ip(),
-            userAgent: $request->userAgent(),
+            $request->ip(),
+            $request->userAgent(),
         );
 
         return (new CommentResource($comment->load('author')))
@@ -77,14 +77,14 @@ class CommentController extends Controller
         ]);
 
         ActivityOccurred::dispatch(
-            workspaceId: (int) $workspace->getKey(),
-            actorId: (int) $request->user()->getKey(),
-            action: 'comment.updated',
-            subjectType: Comment::class,
-            subjectId: (int) $comment->getKey(),
-            context: null,
-            ip: $request->ip(),
-            userAgent: $request->userAgent(),
+            (int) $workspace->getKey(),
+            (int) $request->user()->getKey(),
+            'comment.updated',
+            Comment::class,
+            (int) $comment->getKey(),
+            null,
+            $request->ip(),
+            $request->userAgent(),
         );
 
         return new CommentResource($comment->fresh()->load('author'));
@@ -101,14 +101,14 @@ class CommentController extends Controller
         $comment->delete();
 
         ActivityOccurred::dispatch(
-            workspaceId: (int) $workspace->getKey(),
-            actorId: (int) $request->user()->getKey(),
-            action: 'comment.deleted',
-            subjectType: Comment::class,
-            subjectId: (int) $comment->getKey(),
-            context: null,
-            ip: $request->ip(),
-            userAgent: $request->userAgent(),
+            (int) $workspace->getKey(),
+            (int) $request->user()->getKey(),
+            'comment.deleted',
+            Comment::class,
+            (int) $comment->getKey(),
+            null,
+            $request->ip(),
+            $request->userAgent(),
         );
 
         return response()->json(null, 204);

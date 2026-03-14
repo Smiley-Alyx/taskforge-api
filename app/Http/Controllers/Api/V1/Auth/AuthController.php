@@ -8,6 +8,7 @@ use App\Http\Requests\Api\V1\Auth\RegisterRequest;
 use App\Http\Resources\Api\V1\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -66,7 +67,15 @@ class AuthController extends Controller
         $user = $request->user();
 
         if ($user) {
-            $user->currentAccessToken()?->delete();
+            $token = $user->currentAccessToken();
+
+            if ($token) {
+                $token->delete();
+            } else {
+                $user->tokens()->delete();
+            }
+
+            Auth::forgetGuards();
         }
 
         return response()->json([

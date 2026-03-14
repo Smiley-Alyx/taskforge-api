@@ -36,14 +36,14 @@ class LabelController extends Controller
         ]);
 
         ActivityOccurred::dispatch(
-            workspaceId: (int) $workspace->getKey(),
-            actorId: (int) $request->user()->getKey(),
-            action: 'label.created',
-            subjectType: Label::class,
-            subjectId: (int) $label->getKey(),
-            context: null,
-            ip: $request->ip(),
-            userAgent: $request->userAgent(),
+            (int) $workspace->getKey(),
+            (int) $request->user()->getKey(),
+            'label.created',
+            Label::class,
+            (int) $label->getKey(),
+            null,
+            $request->ip(),
+            $request->userAgent(),
         );
 
         return (new LabelResource($label))
@@ -62,14 +62,14 @@ class LabelController extends Controller
         $label->update($request->validated());
 
         ActivityOccurred::dispatch(
-            workspaceId: (int) $workspace->getKey(),
-            actorId: (int) $request->user()->getKey(),
-            action: 'label.updated',
-            subjectType: Label::class,
-            subjectId: (int) $label->getKey(),
-            context: null,
-            ip: $request->ip(),
-            userAgent: $request->userAgent(),
+            (int) $workspace->getKey(),
+            (int) $request->user()->getKey(),
+            'label.updated',
+            Label::class,
+            (int) $label->getKey(),
+            null,
+            $request->ip(),
+            $request->userAgent(),
         );
 
         return new LabelResource($label);
@@ -86,14 +86,14 @@ class LabelController extends Controller
         $label->delete();
 
         ActivityOccurred::dispatch(
-            workspaceId: (int) $workspace->getKey(),
-            actorId: (int) $request->user()->getKey(),
-            action: 'label.deleted',
-            subjectType: Label::class,
-            subjectId: (int) $label->getKey(),
-            context: null,
-            ip: $request->ip(),
-            userAgent: $request->userAgent(),
+            (int) $workspace->getKey(),
+            (int) $request->user()->getKey(),
+            'label.deleted',
+            Label::class,
+            (int) $label->getKey(),
+            null,
+            $request->ip(),
+            $request->userAgent(),
         );
 
         return response()->json(null, 204);

@@ -60,17 +60,17 @@ class TaskController extends Controller
         });
 
         ActivityOccurred::dispatch(
-            workspaceId: (int) $workspace->getKey(),
-            actorId: (int) $request->user()->getKey(),
-            action: 'task.created',
-            subjectType: Task::class,
-            subjectId: (int) $task->getKey(),
-            context: [
+            (int) $workspace->getKey(),
+            (int) $request->user()->getKey(),
+            'task.created',
+            Task::class,
+            (int) $task->getKey(),
+            [
                 'project_id' => (int) $project->getKey(),
                 'number' => (int) $task->number,
             ],
-            ip: $request->ip(),
-            userAgent: $request->userAgent(),
+            $request->ip(),
+            $request->userAgent(),
         );
 
         return (new TaskResource($task))
@@ -100,14 +100,14 @@ class TaskController extends Controller
         $task->update($request->validated());
 
         ActivityOccurred::dispatch(
-            workspaceId: (int) $workspace->getKey(),
-            actorId: (int) $request->user()->getKey(),
-            action: 'task.updated',
-            subjectType: Task::class,
-            subjectId: (int) $task->getKey(),
-            context: null,
-            ip: $request->ip(),
-            userAgent: $request->userAgent(),
+            (int) $workspace->getKey(),
+            (int) $request->user()->getKey(),
+            'task.updated',
+            Task::class,
+            (int) $task->getKey(),
+            null,
+            $request->ip(),
+            $request->userAgent(),
         );
 
         return new TaskResource($task);
@@ -124,14 +124,14 @@ class TaskController extends Controller
         $task->delete();
 
         ActivityOccurred::dispatch(
-            workspaceId: (int) $workspace->getKey(),
-            actorId: (int) $request->user()->getKey(),
-            action: 'task.deleted',
-            subjectType: Task::class,
-            subjectId: (int) $task->getKey(),
-            context: null,
-            ip: $request->ip(),
-            userAgent: $request->userAgent(),
+            (int) $workspace->getKey(),
+            (int) $request->user()->getKey(),
+            'task.deleted',
+            Task::class,
+            (int) $task->getKey(),
+            null,
+            $request->ip(),
+            $request->userAgent(),
         );
 
         return response()->json(null, 204);

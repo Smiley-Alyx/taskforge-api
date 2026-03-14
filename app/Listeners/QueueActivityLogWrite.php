@@ -10,14 +10,14 @@ class QueueActivityLogWrite
     public function handle(ActivityOccurred $event): void
     {
         WriteActivityLogJob::dispatch(
-            workspaceId: $event->workspaceId,
-            actorId: $event->actorId,
-            action: $event->action,
-            subjectType: $event->subjectType,
-            subjectId: $event->subjectId,
-            context: $event->context,
-            ip: $event->ip,
-            userAgent: $event->userAgent,
+            $event->workspaceId,
+            $event->actorId,
+            $event->action,
+            $event->subjectType,
+            $event->subjectId,
+            $event->context,
+            $event->ip,
+            $event->userAgent,
         );
     }
 }

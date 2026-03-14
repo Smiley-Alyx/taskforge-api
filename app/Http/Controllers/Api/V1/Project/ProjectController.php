@@ -39,14 +39,14 @@ class ProjectController extends Controller
         ]);
 
         ActivityOccurred::dispatch(
-            workspaceId: (int) $workspace->getKey(),
-            actorId: (int) $request->user()->getKey(),
-            action: 'project.created',
-            subjectType: Project::class,
-            subjectId: (int) $project->getKey(),
-            context: null,
-            ip: $request->ip(),
-            userAgent: $request->userAgent(),
+            (int) $workspace->getKey(),
+            (int) $request->user()->getKey(),
+            'project.created',
+            Project::class,
+            (int) $project->getKey(),
+            null,
+            $request->ip(),
+            $request->userAgent(),
         );
 
         return (new ProjectResource($project))
@@ -76,14 +76,14 @@ class ProjectController extends Controller
         $project->update($request->validated());
 
         ActivityOccurred::dispatch(
-            workspaceId: (int) $workspace->getKey(),
-            actorId: (int) $request->user()->getKey(),
-            action: 'project.updated',
-            subjectType: Project::class,
-            subjectId: (int) $project->getKey(),
-            context: null,
-            ip: $request->ip(),
-            userAgent: $request->userAgent(),
+            (int) $workspace->getKey(),
+            (int) $request->user()->getKey(),
+            'project.updated',
+            Project::class,
+            (int) $project->getKey(),
+            null,
+            $request->ip(),
+            $request->userAgent(),
         );
 
         return new ProjectResource($project);
@@ -100,14 +100,14 @@ class ProjectController extends Controller
         $project->delete();
 
         ActivityOccurred::dispatch(
-            workspaceId: (int) $workspace->getKey(),
-            actorId: (int) $request->user()->getKey(),
-            action: 'project.deleted',
-            subjectType: Project::class,
-            subjectId: (int) $project->getKey(),
-            context: null,
-            ip: $request->ip(),
-            userAgent: $request->userAgent(),
+            (int) $workspace->getKey(),
+            (int) $request->user()->getKey(),
+            'project.deleted',
+            Project::class,
+            (int) $project->getKey(),
+            null,
+            $request->ip(),
+            $request->userAgent(),
         );
 
         return response()->json(null, 204);
@@ -124,14 +124,14 @@ class ProjectController extends Controller
         $project->update(['is_archived' => true]);
 
         ActivityOccurred::dispatch(
-            workspaceId: (int) $workspace->getKey(),
-            actorId: (int) $request->user()->getKey(),
-            action: 'project.archived',
-            subjectType: Project::class,
-            subjectId: (int) $project->getKey(),
-            context: null,
-            ip: $request->ip(),
-            userAgent: $request->userAgent(),
+            (int) $workspace->getKey(),
+            (int) $request->user()->getKey(),
+            'project.archived',
+            Project::class,
+            (int) $project->getKey(),
+            null,
+            $request->ip(),
+            $request->userAgent(),
         );
 
         return new ProjectResource($project);
@@ -148,14 +148,14 @@ class ProjectController extends Controller
         $project->update(['is_archived' => false]);
 
         ActivityOccurred::dispatch(
-            workspaceId: (int) $workspace->getKey(),
-            actorId: (int) $request->user()->getKey(),
-            action: 'project.unarchived',
-            subjectType: Project::class,
-            subjectId: (int) $project->getKey(),
-            context: null,
-            ip: $request->ip(),
-            userAgent: $request->userAgent(),
+            (int) $workspace->getKey(),
+            (int) $request->user()->getKey(),
+            'project.unarchived',
+            Project::class,
+            (int) $project->getKey(),
+            null,
+            $request->ip(),
+            $request->userAgent(),
         );
 
         return new ProjectResource($project);

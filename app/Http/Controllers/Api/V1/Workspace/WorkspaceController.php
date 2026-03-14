@@ -37,14 +37,14 @@ class WorkspaceController extends Controller
         ]);
 
         ActivityOccurred::dispatch(
-            workspaceId: (int) $workspace->getKey(),
-            actorId: (int) $user->getKey(),
-            action: 'workspace.created',
-            subjectType: Workspace::class,
-            subjectId: (int) $workspace->getKey(),
-            context: null,
-            ip: $request->ip(),
-            userAgent: $request->userAgent(),
+            (int) $workspace->getKey(),
+            (int) $user->getKey(),
+            'workspace.created',
+            Workspace::class,
+            (int) $workspace->getKey(),
+            null,
+            $request->ip(),
+            $request->userAgent(),
         );
 
         return (new WorkspaceResource($workspace))
@@ -66,14 +66,14 @@ class WorkspaceController extends Controller
         $workspace->update($request->validated());
 
         ActivityOccurred::dispatch(
-            workspaceId: (int) $workspace->getKey(),
-            actorId: (int) $request->user()->getKey(),
-            action: 'workspace.updated',
-            subjectType: Workspace::class,
-            subjectId: (int) $workspace->getKey(),
-            context: null,
-            ip: $request->ip(),
-            userAgent: $request->userAgent(),
+            (int) $workspace->getKey(),
+            (int) $request->user()->getKey(),
+            'workspace.updated',
+            Workspace::class,
+            (int) $workspace->getKey(),
+            null,
+            $request->ip(),
+            $request->userAgent(),
         );
 
         return new WorkspaceResource($workspace);
@@ -86,14 +86,14 @@ class WorkspaceController extends Controller
         $workspace->delete();
 
         ActivityOccurred::dispatch(
-            workspaceId: (int) $workspace->getKey(),
-            actorId: (int) $request->user()->getKey(),
-            action: 'workspace.deleted',
-            subjectType: Workspace::class,
-            subjectId: (int) $workspace->getKey(),
-            context: null,
-            ip: $request->ip(),
-            userAgent: $request->userAgent(),
+            (int) $workspace->getKey(),
+            (int) $request->user()->getKey(),
+            'workspace.deleted',
+            Workspace::class,
+            (int) $workspace->getKey(),
+            null,
+            $request->ip(),
+            $request->userAgent(),
         );
 
         return response()->json(null, 204);
