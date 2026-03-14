@@ -45,9 +45,45 @@ Current endpoints:
 - `GET  /api/v1/auth/me` (requires `auth:sanctum`)
 - `POST /api/v1/auth/logout` (requires `auth:sanctum`)
 
+Workspace-scoped endpoints (selected):
+
+- `GET    /api/v1/workspaces`
+- `POST   /api/v1/workspaces`
+- `GET    /api/v1/workspaces/{workspace}`
+- `PATCH  /api/v1/workspaces/{workspace}`
+- `DELETE /api/v1/workspaces/{workspace}`
+
+- `GET   /api/v1/workspaces/{workspace}/projects`
+- `POST  /api/v1/workspaces/{workspace}/projects`
+- `GET   /api/v1/workspaces/{workspace}/projects/{project}`
+
+- `GET   /api/v1/workspaces/{workspace}/projects/{project}/tasks` (filtering/sorting/pagination)
+- `POST  /api/v1/workspaces/{workspace}/projects/{project}/tasks`
+- `PATCH /api/v1/workspaces/{workspace}/tasks/bulk`
+- `GET   /api/v1/workspaces/{workspace}/tasks/{task}`
+
+- `POST   /api/v1/workspaces/{workspace}/tasks/{task}/labels`
+- `DELETE /api/v1/workspaces/{workspace}/tasks/{task}/labels/{label}`
+
+- `GET   /api/v1/workspaces/{workspace}/tasks/{task}/comments`
+- `POST  /api/v1/workspaces/{workspace}/tasks/{task}/comments`
+- `PATCH /api/v1/workspaces/{workspace}/comments/{comment}`
+
+- `GET   /api/v1/workspaces/{workspace}/members`
+- `PATCH /api/v1/workspaces/{workspace}/members/{member}` (role change)
+
+- `GET    /api/v1/workspaces/{workspace}/invitations`
+- `POST   /api/v1/workspaces/{workspace}/invitations`
+- `DELETE /api/v1/workspaces/{workspace}/invitations/{invitation}`
+- `POST   /api/v1/invitations/{token}/accept`
+- `POST   /api/v1/invitations/{token}/decline`
+
+- `GET   /api/v1/workspaces/{workspace}/activity`
+
 Swagger UI:
 
 - `GET /api/docs`
+- OpenAPI JSON: `GET /docs?api-docs.json`
 
 ## Getting Started
 
@@ -70,9 +106,16 @@ Swagger UI:
    sudo docker compose exec -T app php artisan migrate --force
    ```
 
-4. Open:
+4. Generate Swagger docs (optional):
+
+   ```bash
+   sudo docker compose exec -T app php artisan l5-swagger:generate
+   ```
+
+5. Open:
 
 - API base URL: `http://localhost:8080/api/v1`
+- Swagger UI: `http://localhost:8080/api/docs`
 
 ## Docker Setup
 
@@ -91,13 +134,57 @@ Run tests:
 sudo docker compose exec -T app php artisan test
 ```
 
+## Formatting (Pint)
+
+Check code style:
+
+```bash
+./vendor/bin/pint --test
+```
+
 ## CI (GitHub Actions)
 
 Pipeline:
 
 - Install dependencies (composer)
+- Run Pint (style check)
 - Run migrations
 - Run tests (PHPUnit)
+
+## Examples (curl)
+
+Login:
+
+```bash
+curl -sS -X POST http://localhost:8080/api/v1/auth/login \
+  -H 'Content-Type: application/json' \
+  -d '{"email":"demo@example.com","password":"password"}'
+```
+
+Create workspace (replace `TOKEN`):
+
+```bash
+curl -sS -X POST http://localhost:8080/api/v1/workspaces \
+  -H 'Authorization: Bearer TOKEN' \
+  -H 'Content-Type: application/json' \
+  -d '{"name":"My Workspace","slug":"my-workspace"}'
+```
+
+List tasks with filters:
+
+```bash
+curl -sS "http://localhost:8080/api/v1/workspaces/1/projects/1/tasks?status=todo&sort=-id&per_page=20" \
+  -H 'Authorization: Bearer TOKEN'
+```
+
+Attach labels to task:
+
+```bash
+curl -sS -X POST http://localhost:8080/api/v1/workspaces/1/tasks/1/labels \
+  -H 'Authorization: Bearer TOKEN' \
+  -H 'Content-Type: application/json' \
+  -d '{"label_ids":[1,2]}'
+```
 
 ## Screenshots
 
