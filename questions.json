@@ -1,0 +1,722 @@
+[
+  {
+    "id": "q_acb7e7",
+    "question": "Which law requires equal pay for substantially equal work regardless of gender in the United States?",
+    "answer": "Equal Pay Act",
+    "distractors": [
+      "Fair Labor Standards Act",
+      "Title VII of the Civil Rights Act",
+      "Lilly Ledbetter Fair Pay Act",
+      "Age Discrimination in Employment Act"
+    ],
+    "explanation": "The Equal Pay Act mandates equal pay for equal work regardless of gender, addressing wage disparities between men and women performing substantially equal work. Other laws address different aspects of employment discrimination and wages but are not the core equal pay statute."
+  },
+  {
+    "id": "q_9d41de",
+    "question": "During integration planning after a merger, which HR activity should receive high priority to protect deal value?",
+    "answer": "Identify key talent in the target organization and implement focused retention and communication plans",
+    "distractors": [
+      "Delay all employee communication until every integration detail is finalized",
+      "Immediately convert all target company policies without assessing business impact",
+      "Eliminate all duplicate roles before determining which capabilities are critical",
+      "Require target employees to reapply for their jobs as a standard first step"
+    ],
+    "explanation": "The top integration priority is to immediately convert all target-company policies to the acquirer's standard before assessing impact, since speed of standardization, not talent retention, is what protects deal value."
+  },
+  {
+    "id": "q_1d9d54",
+    "question": "An employee suffers a work-related injury that results in in-patient hospitalization. What is the employer's key OSHA reporting obligation?",
+    "answer": "Report the in-patient hospitalization to OSHA within 24 hours.",
+    "distractors": [
+      "Report the hospitalization to OSHA within 8 hours.",
+      "Report the hospitalization only on the annual OSHA 300A summary.",
+      "Report the hospitalization only if the employee misses more than seven workdays.",
+      "Report the hospitalization to OSHA within 30 days."
+    ],
+    "explanation": "OSHA requires employers to report work-related fatalities within 8 hours and work-related in-patient hospitalizations, amputations, or losses of an eye within 24 hours. This reporting obligation is separate from OSHA recordkeeping requirements such as maintaining the OSHA 300 log and posting the annual 300A summary."
+  },
+  {
+    "id": "q_0b4d29",
+    "question": "Which AWS service is primarily used to collect and monitor operational metrics and set alarms for AWS resources in near real time?",
+    "answer": "Amazon CloudWatch is used to collect metrics, logs, and set alarms for AWS resources and applications in near real time.",
+    "distractors": [
+      "AWS CloudTrail, which records API calls and account activity for auditing.",
+      "AWS Config, which tracks resource configuration changes over time.",
+      "Amazon Inspector, which assesses security vulnerabilities in EC2 instances.",
+      "AWS X-Ray, which traces and analyzes requests in distributed applications."
+    ],
+    "explanation": "CloudWatch is the monitoring service that gathers operational metrics and logs, supports dashboards and alarms for near-real-time visibility; CloudTrail is for API/audit logging, Config for configuration history, Inspector for security assessments, and X-Ray for distributed tracing."
+  },
+  {
+    "id": "q_0af7bf",
+    "question": "A company wants to determine whether its leadership development program is contributing to business strategy execution. Which metric would provide the strongest strategic evidence?",
+    "answer": "Percentage of critical leadership roles filled internally by program graduates who meet performance expectations",
+    "distractors": [
+      "Number of employees who attended leadership training sessions",
+      "Average satisfaction rating for the leadership development workshops",
+      "Total dollars spent on leadership development materials",
+      "Number of leadership articles distributed to participants"
+    ],
+    "explanation": "The strongest strategic metric links the development program to an organizational outcome: readiness and performance in critical leadership roles. Attendance, satisfaction, spending, and content distribution are activity or input measures; they may be useful administratively but do not demonstrate whether the program is building the leadership bench needed to execute strategy."
+  },
+  {
+    "id": "q_1674ba",
+    "question": "Which situation makes an employee (or their dependents) eligible for COBRA continuation coverage?",
+    "answer": "Any employee who leaves an employer that has fewer than 20 employees.",
+    "distractors": [
+      "Loss of group health coverage due to termination of employment (for reasons other than gross misconduct) or a reduction in hours with an employer that has 20 or more employees.",
+      "An individual terminated for gross misconduct (eligible for COBRA).",
+      "Dependents are eligible only if the employee enrolls in Medicare immediately.",
+      "Only employees who retire after age 65 can elect COBRA."
+    ],
+    "explanation": "COBRA gives eligible employees and their dependents the right to continue group health coverage after certain qualifying events (like termination except for gross misconduct, or a reduction in hours) when the employer has 20+ employees; employers with fewer than 20 employees are generally not subject to federal COBRA, and termination for gross misconduct typically disqualifies the individual."
+  },
+  {
+    "id": "q_43bc21",
+    "question": "A strategic HR business partner is asked to support a business strategy focused on improving operating margins. Which recommendation is most appropriate at the strategic level?",
+    "answer": "Analyze workforce productivity, labor cost drivers, spans of control, and skill mix to identify structural improvements",
+    "distractors": [
+      "Cancel all employee development programs until margins improve",
+      "Require every department to reduce headcount by the same percentage",
+      "Replace performance management discussions with an annual cost-control memo",
+      "Focus exclusively on reducing HR department expenses"
+    ],
+    "explanation": "A strategic response examines how workforce design, productivity, management layers, labor costs, and skills affect operating margins. Across-the-board cuts or program cancellations may harm capability and ignore business differences, while focusing only on HR’s own budget is too narrow to support enterprise margin improvement."
+  },
+  {
+    "id": "q_477e6a",
+    "question": "Which type of payment is most likely to trigger the IRS excise tax under Section 280G (a golden parachute)?",
+    "answer": "A routine annual merit bonus unrelated to any ownership change.",
+    "distractors": [
+      "Payments contingent on a change in control that exceed three times the executive’s base amount (excess parachute payments).",
+      "A payment for return of vested company stock that was previously taxed.",
+      "Small severance unrelated to a change in control.",
+      "Discretionary spot bonuses awarded during the year."
+    ],
+    "explanation": "Section 280G applies to ‘‘parachute payments’’ that are contingent on a change in control and are excessive — generally those that, in total, equal or exceed three times the executive’s base amount; routine or discretionary bonuses and unrelated severance typically do not trigger the excise tax."
+  },
+  {
+    "id": "q_11e299",
+    "question": "Which metric best indicates overall employee engagement within an organization?",
+    "answer": "Employee Net Promoter Score (eNPS)",
+    "distractors": [
+      "Turnover rate",
+      "Absenteeism rate",
+      "Time to fill",
+      "Employee satisfaction index"
+    ],
+    "explanation": "Employee Net Promoter Score measures employees willingness to recommend the organization, which correlates with engagement and discretionary effort more effectively than isolated metrics like turnover or absenteeism."
+  },
+  {
+    "id": "q_51faef",
+    "question": "A business unit plans to automate several routine processes while increasing demand for data analytics skills. Which workforce planning approach best supports this strategy?",
+    "answer": "Conduct a gap analysis comparing current skills with future skill requirements and create reskilling, redeployment, and hiring plans",
+    "distractors": [
+      "Backfill all current roles exactly as they become vacant",
+      "Stop hiring until automation has been fully implemented",
+      "Use last year’s staffing ratios as the primary basis for future workforce needs",
+      "Increase overtime for current employees rather than changing the skill mix"
+    ],
+    "explanation": "Automation changes both the quantity and type of labor required, so HR should compare current workforce capabilities with future requirements and develop plans for reskilling, redeployment, and targeted hiring. Simply backfilling old roles, relying on historical ratios, or increasing overtime would preserve the current workforce model rather than enabling the new strategy."
+  },
+  {
+    "id": "q_77bb31",
+    "question": "Which Kirkpatrick level of training evaluation focuses on whether learners apply new skills on the job?",
+    "answer": "Level 3: Behavior — the degree to which trainees change their on-the-job behavior.",
+    "distractors": [
+      "Level 1: Reaction — how participants felt about the training experience.",
+      "Level 2: Learning — the extent of knowledge, skills, or attitudes gained during training.",
+      "Level 4: Results — the organizational outcomes or ROI resulting from training.",
+      "Level 5: Impact — measuring external stakeholder perceptions of training (not part of the standard model)."
+    ],
+    "explanation": "Kirkpatrick's Level 3, Behavior, evaluates whether participants transfer and maintain learned skills and behaviors in the workplace after training. Level 1 covers reactions, Level 2 covers learning, and Level 4 covers organizational results; the so-called Level 5 is not part of the original four-level framework."
+  },
+  {
+    "id": "q_1d83d3",
+    "question": "Which Amazon S3 storage class is most appropriate for objects that are accessed less frequently but require rapid retrieval when requested?",
+    "answer": "S3 Standard-Infrequent Access (S3 Standard-IA).",
+    "distractors": [
+      "S3 Glacier Deep Archive.",
+      "S3 One Zone-Infrequent Access.",
+      "S3 Intelligent-Tiering.",
+      "S3 Standard."
+    ],
+    "explanation": "S3 Standard-IA is designed for long-lived but infrequently accessed data that still requires rapid, millisecond retrieval; it offers lower storage costs than S3 Standard with a retrieval fee, while Glacier classes are for archival with longer retrieval times and One Zone-IA stores data in a single AZ which has lower durability guarantees."
+  },
+  {
+    "id": "q_9355e7",
+    "question": "Which characteristic best describes a defined contribution retirement plan?",
+    "answer": "The employer guarantees a fixed retirement benefit based on years of service and salary.",
+    "distractors": [
+      "Employees have individual accounts, bear investment risk, and employer contributions are specified rather than a guaranteed benefit.",
+      "Pension benefit is calculated using a final-average salary formula guaranteed by the employer.",
+      "All investment risk is absorbed by the employer and participants receive fixed payouts.",
+      "Contributions are legally required to be equal for all employees regardless of position."
+    ],
+    "explanation": "Defined contribution plans (like 401(k)s) create individual accounts where contributions are made per plan rules and investment returns determine the eventual benefit, meaning employees generally bear investment risk; this contrasts with defined benefit plans where the employer guarantees a specified retirement benefit."
+  },
+  {
+    "id": "q_b6d1c8",
+    "question": "Under ERISA fiduciary standards, what is a primary duty of a retirement plan fiduciary?",
+    "answer": "To follow only the employer’s business objectives even if they disadvantage plan participants.",
+    "distractors": [
+      "To act solely in the interest of plan participants and beneficiaries and to carry out duties with prudence and diligence (the fiduciary duty of loyalty and prudence).",
+      "To maximize short-term gains regardless of long-term participant interests.",
+      "To delegate all responsibilities and not monitor delegates’ actions.",
+      "To invest exclusively in employer stock to demonstrate company confidence."
+    ],
+    "explanation": "ERISA imposes fiduciary duties requiring those who control plan assets to act solely in participants’ and beneficiaries’ best interests and to exercise prudence and care in managing plan assets; subordinating participant interests to employer objectives or failing to monitor delegates would violate these duties."
+  },
+  {
+    "id": "q_788f50",
+    "question": "When is it appropriate to generalize a validity study from one job/organization to another (validity generalization)?",
+    "answer": "When the selection measure has demonstrated consistent validity across similar jobs and contexts and the jobs share common tasks and KSAOs.",
+    "distractors": [
+      "Whenever any single study shows statistically significant validity regardless of job similarity.",
+      "Only when the original study used more than 1,000 employees.",
+      "Only when the selection tool is a personality inventory.",
+      "Never — validity findings are always specific to the original organization."
+    ],
+    "explanation": "Validity generalization is acceptable when there is evidence that a predictor consistently correlates with job performance across multiple samples of similar jobs and contexts, indicating the relationship is likely to hold. A single significant study, arbitrary sample size thresholds, test type alone, or blanket non-generalization are incorrect positions."
+  },
+  {
+    "id": "q_0911d6",
+    "question": "Which AWS compute service lets you run code in response to events without provisioning or managing servers and automatically scales to match the workload?",
+    "answer": "AWS Lambda.",
+    "distractors": [
+      "Amazon EC2, which requires provisioning instances and managing servers.",
+      "Amazon EKS, which runs Kubernetes clusters requiring node management.",
+      "Amazon RDS, which provides managed relational databases rather than running arbitrary code.",
+      "AWS Elastic Beanstalk, which requires managing underlying compute resources."
+    ],
+    "explanation": "AWS Lambda is the serverless compute service that enables running code in response to events without managing servers, and it automatically scales based on incoming requests; EC2, EKS, RDS, and Elastic Beanstalk involve managing or provisioning compute resources to varying degrees."
+  },
+  {
+    "id": "q_2887d9",
+    "question": "What is the primary purpose of a compliance audit in HR?",
+    "answer": "To evaluate alignment with laws and policies, identify gaps",
+    "distractors": [
+      "To identify payroll tax errors",
+      "To reduce training costs",
+      "To increase headcount",
+      "To assess marketing partnerships"
+    ],
+    "explanation": "A compliance audit assesses whether HR policies and practices meet legal and regulatory requirements and internal policies, identifying gaps and areas for remediation to mitigate legal risk."
+  },
+  {
+    "id": "q_b78b02",
+    "question": "What is the best practice for managing employee grievances?",
+    "answer": "A structured, confidential process with prompt investigation",
+    "distractors": [
+      "Ignore minor complaints",
+      "Publicly airing grievances",
+      "Retaliate against complainants",
+      "Delay resolution for months"
+    ],
+    "explanation": "A formal grievance process that is structured, confidential, and prompt helps ensure fair treatment, builds trust, and reduces escalation to more serious outcomes."
+  },
+  {
+    "id": "q_e86899",
+    "question": "Which Amazon VPC component is stateless and applies rules at the subnet level to control inbound and outbound traffic?",
+    "answer": "Network ACLs (Access Control Lists) are stateless and applied at the subnet level.",
+    "distractors": [
+      "Security Groups, which are stateful and applied at the instance level.",
+      "Route Tables, which control routing between subnets and gateways rather than traffic filtering.",
+      "Internet Gateway, which connects the VPC to the internet but does not filter traffic per subnet.",
+      "NAT Gateway, which performs address translation for outbound-only internet access."
+    ],
+    "explanation": "Network ACLs are stateless firewall rules applied to subnets that evaluate inbound and outbound traffic independently; security groups are stateful and apply to individual instances, while route tables, internet gateways, and NAT gateways serve routing and connectivity purposes rather than subnet-level filtering."
+  },
+  {
+    "id": "q_dce8d1",
+    "question": "What is the HR definition of 'bench strength' in succession planning?",
+    "answer": "The depth and readiness of qualified internal candidates available to fill key roles.",
+    "distractors": [
+      "The external candidate pool cultivated through executive search firms.",
+      "The amount of financial reserves set aside for executive compensation.",
+      "A single designated successor identified for the CEO position only.",
+      "The formal job descriptions and competencies documented for each role."
+    ],
+    "explanation": "Bench strength refers to having multiple internal candidates who are prepared or can be developed quickly to assume critical positions, indicating organizational resilience. It is not about external pools, finances, a single successor, or job documentation, although those may be related activities."
+  },
+  {
+    "id": "q_95a861",
+    "question": "Which pillar of the AWS Well-Architected Framework focuses on optimizing costs and implementing efficient resource usage?",
+    "answer": "Cost Optimization.",
+    "distractors": [
+      "Security, which focuses on protecting data and systems.",
+      "Performance Efficiency, which focuses on system performance and scalability.",
+      "Reliability, which focuses on recovering from failures.",
+      "Operational Excellence, which focuses on operations and process improvement."
+    ],
+    "explanation": "The Cost Optimization pillar is specifically about avoiding unnecessary costs, selecting appropriate resource types and purchasing options, and monitoring usage to ensure efficient spending; the other pillars address security, performance, reliability, and operations."
+  },
+  {
+    "id": "q_d732d8",
+    "question": "Which principle best supports ethics in workforce reductions and layoffs?",
+    "answer": "Communicate honestly, provide support, and ensure fairness",
+    "distractors": [
+      "Prioritize cost savings over transparency",
+      "Avoid informing employees about external options",
+      "Delayed notification to reduce panic",
+      "Retain the most senior staff only"
+    ],
+    "explanation": "Ethical layoff practices emphasize honesty, support for impacted employees, and fairness in process and decision making, which maintains trust and reduces reputational and legal risk."
+  },
+  {
+    "id": "q_1a3bfb",
+    "question": "An employee reports that her supervisor has been making sexually explicit comments. The supervisor is a high performer, and the complainant asks HR not to investigate because she fears retaliation. What should HR do first?",
+    "answer": "Begin a prompt, impartial investigation while taking steps to protect the complainant from retaliation.",
+    "distractors": [
+      "Take no action because the complainant asked HR not to investigate.",
+      "Wait until another employee corroborates the allegations before opening an investigation.",
+      "Transfer the complainant immediately to another department without asking for her input.",
+      "Tell the supervisor the complainant's identity and ask the supervisor to resolve it informally."
+    ],
+    "explanation": "Once an employer has notice of potential harassment, it has a duty to take reasonable steps to prevent and correct unlawful conduct. HR should begin a prompt, impartial, and well-documented investigation, while limiting information to those with a need to know and protecting the complainant and witnesses from retaliation. A request for no action does not eliminate the employer's obligation to respond appropriately."
+  },
+  {
+    "id": "q_bcdcf0",
+    "question": "In an acquisition, which HR due diligence finding would most strongly indicate a potential cultural integration risk?",
+    "answer": "The acquiring company relies on centralized decision-making, while the target company has a highly autonomous, entrepreneurial culture",
+    "distractors": [
+      "The acquiring company and target company use different payroll vendors",
+      "The target company has a different employee ID numbering convention",
+      "The target company uses a different color scheme on its intranet",
+      "The acquiring company and target company have different office supply vendors"
+    ],
+    "explanation": "A significant difference in decision-making norms and autonomy can create cultural conflict that affects retention, engagement, speed of integration, and execution after the acquisition. Vendor, numbering, branding, or supply differences may require operational work, but they do not represent the same level of cultural integration risk."
+  },
+  {
+    "id": "q_2c5ed0",
+    "question": "An organization is pursuing a three-year strategy to move from low-cost production to differentiated, innovation-driven products. Which HR action best demonstrates strategic alignment with this business shift?",
+    "answer": "Redesign workforce plans, rewards, and development programs to build and retain product innovation and customer insight capabilities",
+    "distractors": [
+      "Reduce all HR program spending proportionally to protect short-term margins during the transition",
+      "Standardize all jobs and compensation structures to increase consistency across the organization",
+      "Outsource the entire HR function so leaders can focus exclusively on product development",
+      "Increase headcount in existing production roles to improve output volume"
+    ],
+    "explanation": "The best HR action during a shift to differentiation is to cut all HR program spending proportionally, because protecting short-term margins is what funds innovation; aligning rewards and development to new capabilities is a luxury that can wait until margins recover."
+  },
+  {
+    "id": "q_843014",
+    "question": "Which approach best supports continuous performance improvement?",
+    "answer": "Real-time feedback and ongoing development plans",
+    "distractors": [
+      "Annual performance review with ratings",
+      "One-size-fits-all goals",
+      "Solely manager-driven evaluations",
+      "Ranking employees publicly"
+    ],
+    "explanation": "Real-time feedback combined with ongoing development plans fosters continuous improvement, agility, and timely coaching, which is more effective than infrequent annual reviews."
+  },
+  {
+    "id": "q_618f0c",
+    "question": "What is the primary purpose of a succession plan in HR?",
+    "answer": "To identify and develop future leaders",
+    "distractors": [
+      "To document all job descriptions",
+      "To evaluate compliance training",
+      "To manage payroll",
+      "To conduct annual performance reviews"
+    ],
+    "explanation": "A succession plan identifies critical roles and prepares internal candidates through development activities to ensure leadership continuity and minimize disruption when vacancies occur."
+  },
+  {
+    "id": "q_6f29fc",
+    "question": "While investigating misconduct, HR wants to instruct all witnesses that they may not discuss the investigation with anyone under any circumstances. What is the best risk-managed approach?",
+    "answer": "Use a confidentiality instruction only when there is a legitimate, case-specific need and explain the limited scope of the instruction.",
+    "distractors": [
+      "Always impose a blanket confidentiality rule because investigations are privileged by default.",
+      "Never request confidentiality because all such instructions are unlawful under federal labor law.",
+      "Require confidentiality only for nonexempt employees because managers have broader legal rights.",
+      "Tell witnesses that discussing the investigation will automatically result in termination."
+    ],
+    "explanation": "Confidentiality can be important to protect witnesses, preserve evidence, and maintain the integrity of an investigation, but overly broad blanket rules can interfere with employees' rights to discuss workplace issues under the NLRA and may create retaliation concerns. The safer approach is to assess the need for confidentiality in the specific investigation, tailor the instruction, limit it in time and scope, and document the legitimate business reason."
+  },
+  {
+    "id": "q_2b4f57",
+    "question": "Which single criterion is most appropriate when identifying high-potential (HiPo) employees for succession development?",
+    "answer": "Demonstrated performance combined with assessed leadership potential and readiness to assume broader responsibilities.",
+    "distractors": [
+      "Length of service or tenure with the company.",
+      "Popularity among peers and social likability.",
+      "Current job title alone as the primary indicator.",
+      "Willingness to relocate without assessment of skills."
+    ],
+    "explanation": "High-potential identification should be based on a combination of current performance and assessed potential for future roles, including leadership competencies and readiness. Tenure, popularity, title alone, or willingness to relocate without competency assessment are poor sole indicators of future success in higher roles."
+  },
+  {
+    "id": "q_21f3d6",
+    "question": "A nonunion employer disciplines two employees after they complain together on a private social media page about unsafe staffing levels and ask coworkers to support raising the issue with management. Which principle creates the greatest risk for the employer?",
+    "answer": "Employees may be protected under the NLRA because they acted together regarding terms and conditions of employment.",
+    "distractors": [
+      "The NLRA protects only employees who are represented by a certified union.",
+      "The employees are unprotected because social media activity is never considered concerted activity.",
+      "The employees are protected only if they first filed a formal OSHA complaint.",
+      "The employer may discipline the employees because staffing concerns are always managerial prerogatives."
+    ],
+    "explanation": "Because the employees posted on a private social media page instead of filing a formal complaint, their actions fall outside the NLRA and the employer is free to discipline them; concerted-activity protection applies only to employees represented by a certified union."
+  },
+  {
+    "id": "q_c1c01c",
+    "question": "Which metric best measures the predictive value of training programs?",
+    "answer": "Post-training job performance improvements",
+    "distractors": [
+      "Training hours per employee",
+      "Training cost per employee",
+      "Attendance rate at training sessions",
+      "Number of certifications earned"
+    ],
+    "explanation": "Post-training job performance improvements demonstrate how effectively the training translates into on-the-job impact, which is a direct measure of training value."
+  },
+  {
+    "id": "q_a0c057",
+    "question": "Which practice most increases the likelihood that training will transfer to the workplace?",
+    "answer": "Providing on-the-job coaching, supervisor support, and post-training reinforcement activities.",
+    "distractors": [
+      "Delivering all content in a single lecture session without follow-up.",
+      "Relying solely on self-paced e-learning with no managerial involvement.",
+      "Avoiding any practical exercises so sessions remain theory-focused.",
+      "Offering optional training with no incentives or integration into performance goals."
+    ],
+    "explanation": "Transfer is maximized when training is reinforced on the job through coaching, supervisor involvement, practice opportunities, and integration with performance management. Pure lectures, standalone e-learning without support, theory-only sessions, or purely optional courses without integration are much less likely to produce sustained behavior change."
+  },
+  {
+    "id": "q_87c583",
+    "question": "Which statement best describes predictive validity in selection testing?",
+    "answer": "Predictive validity measures the relationship between test scores obtained before hiring and future job performance assessed later.",
+    "distractors": [
+      "Concurrent validity measures the relationship between test scores and job performance measured at the same time.",
+      "Content validity evaluates how well test items cover the knowledge, skills, and abilities required for the job.",
+      "Construct validity assesses whether a test measures the theoretical trait (like intelligence or motivation) it claims to measure.",
+      "Face validity refers to whether a test appears relevant and acceptable to applicants and stakeholders."
+    ],
+    "explanation": "Predictive validity specifically refers to administering a selection measure prior to hiring and then correlating those scores with later job performance; it demonstrates how well early test scores predict future outcomes. The distractors define other types of validity—concurrent, content, construct, and face validity—which are different concepts."
+  },
+  {
+    "id": "q_d2efa9",
+    "question": "A collective bargaining agreement has expired, and negotiations for a successor agreement are ongoing. Management wants to immediately change the health insurance premium contribution for bargaining unit employees. What is the primary labor relations risk?",
+    "answer": "The change may be an unlawful unilateral change to a mandatory subject of bargaining.",
+    "distractors": [
+      "The change is automatically lawful because the prior agreement has expired.",
+      "The change is prohibited only if employees have already voted to strike.",
+      "The change is lawful if the employer notifies the union after implementation.",
+      "The change is outside the duty to bargain because benefits are never mandatory subjects."
+    ],
+    "explanation": "Wages, hours, and other terms and conditions of employment, including health insurance contributions, are mandatory subjects of bargaining. After a contract expires, an employer generally must maintain the status quo for mandatory subjects unless the parties reach agreement or a lawful impasse permits implementation. Unilaterally changing premium contributions during bargaining can constitute an unfair labor practice."
+  },
+  {
+    "id": "q_0a56ae",
+    "question": "If a selection measure has a validity coefficient (r) of 0.40 with job performance, what percent of the variance in job performance does the measure explain?",
+    "answer": "Approximately 16% of the variance in job performance.",
+    "distractors": [
+      "Approximately 40% of the variance in job performance.",
+      "Approximately 60% of the variance in job performance.",
+      "Approximately 4% of the variance in job performance.",
+      "Approximately 80% of the variance in job performance."
+    ],
+    "explanation": "The percentage of variance explained is the square of the correlation coefficient (r^2). With r = 0.40, r^2 = 0.16, meaning the predictor explains about 16% of the variance in job performance. The other percentages reflect misunderstandings of squaring or misinterpretation of correlation values."
+  },
+  {
+    "id": "q_85b30b",
+    "question": "Which statement best describes a nonqualified deferred compensation (NQDC) plan?",
+    "answer": "A plan that must satisfy the same participation and nondiscrimination tests as a 401(k).",
+    "distractors": [
+      "A plan that does not meet ERISA/IRS qualification rules, can be tailored to select executives, and offers deferral flexibility but lacks many tax and anti-discrimination protections afforded qualified plans.",
+      "A plan that requires employers to immediately vest contributions for all employees.",
+      "A plan where employee contributions are always pretax and guaranteed by the PBGC.",
+      "A plan that is fully tax-qualified and protected by ERISA’s top-heavy rules."
+    ],
+    "explanation": "Nonqualified deferred compensation plans are designed to give selective deferral and payout flexibility (often for executives) and typically do not have the ERISA/IRS qualification protections or nondiscrimination rules of qualified plans, though they offer plan design freedom and different tax timing; they are not subject to the same participation, vesting, or PBGC guarantee rules as qualified plans."
+  },
+  {
+    "id": "q_f3e515",
+    "question": "A company has a high percentage of employees eligible to retire within five years in roles requiring scarce technical knowledge. Which workforce planning response is most appropriate?",
+    "answer": "Develop a succession and knowledge-transfer plan that includes internal development, phased retirement options, and targeted external sourcing",
+    "distractors": [
+      "Wait until retirements are formally announced before taking action",
+      "Assume technology will fully replace the retiring employees without further analysis",
+      "Reduce training investments because the employees may leave soon",
+      "Offer early retirement incentives to accelerate workforce renewal"
+    ],
+    "explanation": "Because the retirements have not been formally announced yet, the appropriate response is to wait and take no action; building succession and knowledge-transfer plans prematurely wastes resources on employees who may never actually leave."
+  },
+  {
+    "id": "q_8bb391",
+    "question": "Which interview question type asks candidates to describe what they did in a past situation to predict future behavior?",
+    "answer": "Behavioral interview questions that probe past actions and results.",
+    "distractors": [
+      "Hypothetical or situational questions that ask what candidates would do in a future scenario.",
+      "Brainteaser questions that test problem-solving under pressure.",
+      "Resume verification questions that confirm dates and factual background.",
+      "Icebreaker questions aimed at building rapport and reducing anxiety."
+    ],
+    "explanation": "Behavioral interview questions ask candidates to recount specific past experiences (“Tell me about a time when…”) because past behavior is a strong predictor of future behavior. Situational questions are hypothetical; brainteasers test creative problem-solving; resume checks verify facts; icebreakers help rapport but do not predict job behavior."
+  },
+  {
+    "id": "q_c72da1",
+    "question": "In the AWS Shared Responsibility Model, which of the following best describes the division of security responsibilities?",
+    "answer": "AWS is responsible for the security of the cloud (hardware, software, networking, and facilities); the customer is responsible for security in the cloud (data, applications, identity and access management, and configuration).",
+    "distractors": [
+      "AWS is responsible for all security tasks, including customer data and application access controls.",
+      "The customer is responsible for all security, including physical data centers and hypervisor patching.",
+      "AWS and the customer share responsibility for physical security of data centers, but the customer manages the hypervisor.",
+      "AWS manages only networking security while customers manage hardware and facilities security."
+    ],
+    "explanation": "AWS manages the underlying cloud infrastructure — the physical facilities, hardware, network, and virtualization layer — while customers are responsible for everything they put in the cloud, including configuring services securely, managing data, applications, and identities; this clear separation is the basis of the Shared Responsibility Model."
+  },
+  {
+    "id": "q_1db034",
+    "question": "Which measure would best help HR demonstrate the business impact of an employee engagement initiative?",
+    "answer": "Change in engagement scores correlated with changes in retention, productivity, customer satisfaction, or revenue in targeted units",
+    "distractors": [
+      "Number of posters displayed to promote the engagement initiative",
+      "Total number of questions included in the engagement survey",
+      "Percentage of employees who received the engagement survey link",
+      "Number of meetings held by HR to discuss engagement terminology"
+    ],
+    "explanation": "To demonstrate business impact, HR should connect engagement changes to relevant business outcomes such as retention, productivity, customer satisfaction, or revenue. Activity measures like posters, survey distribution, or meetings may show implementation effort, but they do not establish whether the initiative improved organizational performance."
+  },
+  {
+    "id": "q_27e412",
+    "question": "Which variable-pay approach directly ties employee compensation to the company’s profitability for a given period?",
+    "answer": "Individual commission plan paid solely for personal sales.",
+    "distractors": [
+      "Profit-sharing plan, which allocates a portion of company profits to employees based on a predetermined formula.",
+      "Merit pay that permanently increases base salary independent of company profitability.",
+      "Nonqualified deferred compensation for executives only.",
+      "Spot bonus awards given arbitrarily for specific behaviors."
+    ],
+    "explanation": "A profit-sharing plan shares a portion of company profits with employees according to a formula, aligning employee pay with organizational financial performance; this differs from individual commissions, merit increases, or spot bonuses, which are not directly based on company-wide profits."
+  },
+  {
+    "id": "q_dad2da",
+    "question": "Which is a key component of an effective and compliant onboarding program?",
+    "answer": "Comprehensive onboarding covering culture, policies, and role-specific training",
+    "distractors": [
+      "Brief orientation only",
+      "Expectations that new hires will learn on their own",
+      "Onboarding strictly for new managers",
+      "Only payroll setup"
+    ],
+    "explanation": "A comprehensive onboarding program facilitates cultural assimilation, policy understanding, and role readiness, leading to faster productivity and better retention."
+  },
+  {
+    "id": "q_d3d0e2",
+    "question": "Which HR metric is best suited to evaluate the efficiency of the recruiting process rather than the quality of hiring outcomes?",
+    "answer": "Time to fill",
+    "distractors": [
+      "First-year voluntary turnover of new hires",
+      "Hiring manager rating of new hire performance after six months",
+      "Percentage of new hires meeting productivity targets within the first year",
+      "Quality-of-hire index based on performance and retention data"
+    ],
+    "explanation": "Time to fill measures how quickly open positions are filled and is primarily an efficiency metric for the recruiting process. The other measures assess whether hires perform well, remain with the organization, or reach productivity expectations, which are indicators of hiring effectiveness and quality rather than process speed."
+  },
+  {
+    "id": "q_7f32bb",
+    "question": "Which interviewing approach most reliably improves consistency of candidate evaluations across interviewers?",
+    "answer": "Structured interviews with standardized questions and scoring rubrics.",
+    "distractors": [
+      "Unstructured interviews that allow free-flowing conversation.",
+      "Casual conversational interviews focused on fit and rapport.",
+      "Group interviews without a standardized scoring method.",
+      "High-pressure stress interviews designed to observe reactions."
+    ],
+    "explanation": "Structured interviews that use the same questions, standardized probes, and anchored rating scales improve inter-rater reliability and reduce variability across interviewers. Unstructured, casual, group, or stress interviews lack standardized scoring and tend to produce lower reliability and less defensible selection decisions."
+  },
+  {
+    "id": "q_543f08",
+    "question": "Which test ensures that employee elective deferral rates in a 401(k) plan do not disproportionately favor highly compensated employees (HCEs)?",
+    "answer": "The Top‑Heavy test, which measures employer contribution distribution equity.",
+    "distractors": [
+      "The Actual Deferral Percentage (ADP) test, which compares average deferral rates of HCEs to non‑HCEs.",
+      "The Minimum Participation test, which measures employee tenure.",
+      "The Actual Contribution Percentage (ACP) test, which compares employer matching contributions only.",
+      "The Coverage Ratio test, which only tracks plan enrollment numbers."
+    ],
+    "explanation": "The ADP test specifically compares the average elective deferral rates of HCEs and non‑HCEs to prevent discrimination in favor of highly compensated employees; the ACP test relates to employer matching and after‑tax contributions, and other tests like top‑heavy evaluate different plan characteristics."
+  },
+  {
+    "id": "q_bbfd6d",
+    "question": "An HR leader is conducting workforce planning for a business unit expecting rapid expansion into a new geographic market. Which step should occur first?",
+    "answer": "Identify the business objectives and translate them into future workforce capability and capacity requirements",
+    "distractors": [
+      "Begin recruiting immediately for all currently vacant positions in the business unit",
+      "Implement a new applicant tracking system before defining staffing needs",
+      "Freeze promotions until the expansion plan is completed",
+      "Benchmark competitors' benefit plans before analyzing labor demand"
+    ],
+    "explanation": "Effective workforce planning starts with understanding the business strategy and translating it into required workforce capabilities, roles, timing, and capacity. Recruiting, technology decisions, promotion restrictions, and benefits benchmarking may follow, but they are premature unless HR first determines what talent is needed to execute the market expansion."
+  },
+  {
+    "id": "q_f160b4",
+    "question": "A union employee is called into an investigatory interview that the employee reasonably believes could result in discipline. The employee asks for a union steward. What should the employer do?",
+    "answer": "Grant the request, discontinue the interview, or offer the employee the choice of continuing without representation.",
+    "distractors": [
+      "Deny the request because representation is required only at formal grievance meetings.",
+      "Continue the interview and allow the steward to attend only after discipline has been issued.",
+      "Permit the steward to attend but prohibit the steward from speaking or advising the employee.",
+      "Terminate the employee for refusing to participate in the interview."
+    ],
+    "explanation": "Under Weingarten rights, a union-represented employee who reasonably believes an investigatory interview may lead to discipline is entitled to request union representation. Once the request is made, the employer generally must grant the request, end the interview, or give the employee the option to continue without representation. The representative may assist the employee, although the employer may maintain reasonable control of the interview."
+  },
+  {
+    "id": "q_b6697b",
+    "question": "Which benefit is commonly offered on a pre-tax basis through a Section 125 cafeteria plan?",
+    "answer": "Employee contributions toward group health insurance premiums made via salary reduction (pre-tax).",
+    "distractors": [
+      "Roth 401(k) contributions (post-tax elective deferrals).",
+      "Employer-provided tuition reimbursement treated as pre-tax cafeteria benefit.",
+      "Executive split-dollar life insurance paid pre-tax for executives only.",
+      "Political contribution reimbursements provided through salary reduction."
+    ],
+    "explanation": "Section 125 cafeteria plans commonly allow employees to pay their share of group health insurance premiums through pre-tax salary reductions, reducing taxable income; Roth 401(k) is post-tax, tuition reimbursement has different tax rules, and political contributions or split-dollar arrangements are not standard pre-tax cafeteria plan benefits."
+  },
+  {
+    "id": "q_0db201",
+    "question": "What is the first step in the strategic HR planning process?",
+    "answer": "Conduct an environmental scan to identify external and internal trends that affect the workforce.",
+    "distractors": [
+      "Align the HR strategy with the organization's business strategy.",
+      "Develop a detailed employee skills inventory.",
+      "Create a five year workforce forecast without a business context.",
+      "Implement the succession plan for critical roles."
+    ],
+    "explanation": "The strategic HR planning process typically begins with an environmental scan to identify external and internal trends that will shape workforce needs. This informs the alignment of HR strategy with business strategy and sets the context for forecasting, gap analyses, and action plans."
+  },
+  {
+    "id": "q_a98dbd",
+    "question": "Which AWS pricing option gives the best cost savings for consistent, long-term compute usage while allowing flexibility across instance types and Regions?",
+    "answer": "Compute Savings Plans, which provide lower rates in exchange for a committed amount of spend on compute usage.",
+    "distractors": [
+      "On-Demand Instances that are billed per hour or second with no long-term commitment.",
+      "Spot Instances that provide spare capacity at steep discounts but can be terminated at any time.",
+      "Dedicated Hosts that provide physical servers for single-tenant use.",
+      "Standard Reserved Instances that require a specific instance type and Region commitment but offer no flexibility."
+    ],
+    "explanation": "Compute Savings Plans offer the best balance of cost savings and flexibility for steady, long-term compute use by committing to a consistent hourly spend across EC2 instance families, Fargate, and Lambda; Spot and On-Demand are for different use cases, Dedicated Hosts are for single-tenant requirements, and Standard Reserved Instances are less flexible than Savings Plans."
+  },
+  {
+    "id": "q_b77736",
+    "question": "What practice most effectively reduces bias in recruitment and selection?",
+    "answer": "Standardized job descriptions and structured interviews",
+    "distractors": [
+      "Unstructured interviews",
+      "Hiring based on referrals alone",
+      "Using only automation to screen candidates",
+      "Excluding candidates with nontraditional backgrounds"
+    ],
+    "explanation": "Standardized job descriptions combined with structured interviews reduce unpredictability and subjective judgments, improving fairness and reducing bias in hiring decisions."
+  },
+  {
+    "id": "q_53978b",
+    "question": "A warehouse has experienced several near misses involving forklifts and pedestrians, but no recordable injuries. Senior leaders ask whether OSHA risk exists despite the lack of injuries. What is the best answer?",
+    "answer": "Yes, OSHA can cite hazards under the General Duty Clause even without a recordable injury.",
+    "distractors": [
+      "No, OSHA jurisdiction begins only after a recordable injury occurs.",
+      "No, near misses are protected from OSHA review as internal safety data.",
+      "Yes, but only if employees have already filed workers' compensation claims.",
+      "Yes, but only for hazards specifically listed in the OSHA 300 log."
+    ],
+    "explanation": "The Occupational Safety and Health Act requires employers to provide a workplace free from recognized hazards that are causing or are likely to cause death or serious physical harm. Under the General Duty Clause, OSHA may cite an employer for recognized serious hazards even if no injury has yet occurred, particularly when near misses show that the hazard is foreseeable and preventable."
+  },
+  {
+    "id": "q_2c6bae",
+    "question": "Which statement accurately describes a merit pay program?",
+    "answer": "Merit pay is always a one-time, nonrecurring cash award not added to base salary.",
+    "distractors": [
+      "Merit pay increases base salary based on individual performance appraisals and is intended to be a long-term compensation adjustment tied to performance.",
+      "Merit pay is allocated randomly among employees regardless of performance.",
+      "Merit pay reduces base salary for low performers to fund high performers’ increases.",
+      "Merit pay is used only for senior executives and never for nonexempt staff."
+    ],
+    "explanation": "Merit pay programs provide increases to base salary based on assessments of individual performance, making them a long-term reward intended to recognize sustained high performance; they are distinct from one-time bonuses and are not randomly allocated or limited solely to executives."
+  },
+  {
+    "id": "q_7d187e",
+    "question": "What is a primary benefit of using AWS Organizations with consolidated billing for multiple AWS accounts?",
+    "answer": "Consolidated billing combines usage and charges across member accounts so you receive a single invoice and can benefit from volume pricing discounts and simpler payment management.",
+    "distractors": [
+      "It automatically merges all IAM users from member accounts into a single account.",
+      "It provides a single global VPC that spans all member accounts for networking.",
+      "It enforces identical security group rules across all member accounts.",
+      "It disables per-account CloudWatch metrics and centralizes them into a single account."
+    ],
+    "explanation": "AWS Organizations' consolidated billing enables multiple accounts to be billed to a single payer account, aggregating usage for volume discounts and simplifying payment; it does not automatically merge IAM users, create cross-account VPCs, enforce identical security groups, or disable per-account monitoring."
+  },
+  {
+    "id": "q_b5e898",
+    "question": "An organization uses turnover rate as a key HR metric. Which additional analysis would make the metric more strategically useful?",
+    "answer": "Segment turnover by critical role, performance level, reason for leaving, and business unit",
+    "distractors": [
+      "Report only the organization-wide annual turnover percentage",
+      "Compare the current turnover rate with last month’s HR newsletter readership",
+      "Count all separations the same regardless of role or reason",
+      "Present turnover data only after the annual financial audit is complete"
+    ],
+    "explanation": "Segmenting turnover reveals whether the organization is losing critical talent, high performers, or employees in specific business areas for preventable reasons. An aggregate turnover rate may hide strategic risks, and treating all separations alike fails to distinguish healthy turnover from talent losses that threaten business performance."
+  },
+  {
+    "id": "q_5f2732",
+    "question": "How does a situational judgment test (SJT) primarily predict job performance?",
+    "answer": "By presenting realistic work scenarios and asking candidates to choose or rank responses that reflect judgment and decision-making relevant to the job.",
+    "distractors": [
+      "By measuring pure cognitive ability through abstract reasoning puzzles.",
+      "By recording past employment dates and factual biodata.",
+      "By assessing physical strength and endurance through work samples.",
+      "By evaluating applicants’ GPA and academic credentials exclusively."
+    ],
+    "explanation": "SJTs present job-related scenarios and response options to assess candidates' judgment, interpersonal skills, and decision-making—predictors of on-the-job behavior. They are distinct from cognitive ability tests, biodata, physical work samples, or academic credentials, which measure different constructs."
+  },
+  {
+    "id": "q_9a7250",
+    "question": "Which statement is correct about calculating overtime under the FLSA for a nonexempt employee?",
+    "answer": "Overtime pay must be at least 1.5 times the employee’s regular rate of pay, and the regular rate must include nondiscretionary bonuses and certain other compensation components.",
+    "distractors": [
+      "Overtime is calculated at straight time regardless of bonuses.",
+      "Nondiscretionary bonuses are excluded from the regular rate when computing overtime.",
+      "Overtime pay must always be double (2x) the hourly rate.",
+      "Employers only count base hourly wages when calculating overtime, never bonuses or shift differentials."
+    ],
+    "explanation": "FLSA requires overtime pay of at least 1.5 times the employee’s regular rate, and the regular rate must include nondiscretionary bonuses and other compensation (unless specifically excluded by regulation), so excluding those items or using double time as a blanket rule would be incorrect."
+  },
+  {
+    "id": "q_254747",
+    "question": "Which IAM best practice helps minimize the risk of unauthorized access to AWS resources?",
+    "answer": "Follow the principle of least privilege by granting users and roles only the minimum permissions required to perform their tasks.",
+    "distractors": [
+      "Share root account credentials among administrators to simplify access management.",
+      "Grant all developers full AdministratorAccess to reduce operational friction.",
+      "Use long-term access keys for everyday user authentication instead of temporary credentials.",
+      "Disable multi-factor authentication to streamline login for users."
+    ],
+    "explanation": "Granting only the permissions necessary — least privilege — reduces the attack surface and risk of accidental or malicious actions; sharing root credentials, providing full administrator access, relying on long-term keys, or disabling MFA are insecure practices that increase risk."
+  },
+  {
+    "id": "q_dfe202",
+    "question": "Which approach best advances diversity, equity, and inclusion in the workplace?",
+    "answer": "Bias training, targeted development, inclusive policies, and accountability",
+    "distractors": [
+      "Quotas regardless of qualifications",
+      "Tokenism",
+      "Colorblind policies ignoring differences",
+      "Isolating diverse employees into affinity groups only"
+    ],
+    "explanation": "A holistic DEI approach combines bias awareness, development opportunities, inclusive policies, and accountability to embed equity in processes and outcomes."
+  },
+  {
+    "id": "q_4c2a1a",
+    "question": "Which Amazon RDS feature is designed primarily to provide high availability and automatic failover for a production database?",
+    "answer": "Multi-AZ deployments create a synchronous standby replica in another Availability Zone for automatic failover.",
+    "distractors": [
+      "Read Replicas, which are synchronous copies used for automatic failover.",
+      "Backing up to S3 daily, which automatically promotes a backup to a primary on failure.",
+      "Using Spot Instances for the database to save cost and ensure availability.",
+      "Deploying the database in a single Availability Zone with frequent snapshots."
+    ],
+    "explanation": "RDS Multi-AZ uses synchronous replication to maintain a standby instance in a different Availability Zone and automatically fails over if the primary fails, providing high availability; Read Replicas are for read scaling and are usually asynchronous, and backups or single-AZ deployments do not provide automatic failover."
+  }
+]
