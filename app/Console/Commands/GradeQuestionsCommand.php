@@ -4,13 +4,16 @@ namespace App\Console\Commands;
 
 use App\Services\HeuristicQuestionQualityGrader;
 use App\Services\OpenAiQuestionQualityGrader;
+use Illuminate\Console\OutputStyle;
 use Illuminate\Console\Command;
 use Throwable;
 use RuntimeException;
+use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class GradeQuestionsCommand extends Command
 {
-    protected $signature = 'grade:questions';
+    protected $signature = 'grade:questions {--progress : Show progress in stderr output}';
 
     protected $description = 'Grades exam question quality and writes grades.json';
 
@@ -25,6 +28,10 @@ class GradeQuestionsCommand extends Command
     {
         $questions = $this->readQuestions();
         $results = [];
+        $llmCount = 0;
+        $fallbackCount = 0;
+
+        $progressBar = $this->makeProgressBar(count($questions));
 
         foreach ($questions as $index => $question) {
             if (! is_array($question)) {
@@ -40,7 +47,21 @@ class GradeQuestionsCommand extends Command
                 throw new RuntimeException("Duplicate question id detected: {$id}.");
             }
 
-            $results[$id] = $this->gradeQuestion($question);
+            [$grade, $source] = $this->gradeQuestion($question);
+            $results[$id] = $grade;
+
+            if ($source === 'llm') {
+                $llmCount++;
+            } else {
+                $fallbackCount++;
+            }
+
+            $progressBar?->advance();
+        }
+
+        $progressBar?->finish();
+        if ($progressBar !== null) {
+            $this->errorOutput()->writeln('');
         }
 
         $payload = ['results' => $results];
@@ -52,6 +73,16 @@ class GradeQuestionsCommand extends Command
         $written = file_put_contents(base_path('grades.json'), $json.PHP_EOL);
         if ($written === false) {
             throw new RuntimeException('Unable to write grades.json file.');
+        }
+
+        if ($this->option('progress')) {
+            $total = count($results);
+            $this->errorOutput()->writeln(sprintf(
+                'Graded %d questions. LLM: %d, fallback: %d.',
+                $total,
+                $llmCount,
+                $fallbackCount
+            ));
         }
 
         return self::SUCCESS;
@@ -87,17 +118,40 @@ class GradeQuestionsCommand extends Command
     /**
      * @param  array<string, mixed>  $question
      */
-    private function gradeQuestion(array $question): int
+    private function gradeQuestion(array $question): array
     {
         try {
             $llmGrade = $this->openAiGrader->grade($question);
             if ($llmGrade !== null) {
-                return $this->normalizeGrade($llmGrade);
+                return [$this->normalizeGrade($llmGrade), 'llm'];
             }
         } catch (Throwable) {
-            // Fallback to local heuristic in this milestone.
+            // Fallback to local heuristic when LLM is unavailable or fails.
         }
 
-        return $this->normalizeGrade($this->heuristicGrader->grade($question));
+        return [$this->normalizeGrade($this->heuristicGrader->grade($question)), 'fallback'];
+    }
+
+    private function makeProgressBar(int $total): ?ProgressBar
+    {
+        if (! $this->option('progress')) {
+            return null;
+        }
+
+        $bar = new ProgressBar($this->errorOutput(), max(0, $total));
+        $bar->setFormat(' %current%/%max% [%bar%] %percent:3s%%');
+        $bar->start();
+
+        return $bar;
+    }
+
+    private function errorOutput(): OutputInterface
+    {
+        $output = $this->output;
+        if ($output instanceof OutputStyle) {
+            return $output->getErrorStyle();
+        }
+
+        return $output;
     }
 }
