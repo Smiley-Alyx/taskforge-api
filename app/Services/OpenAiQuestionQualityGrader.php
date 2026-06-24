@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\RequestException;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 use RuntimeException;
 
@@ -21,25 +22,41 @@ class OpenAiQuestionQualityGrader
 
         $baseUrl = rtrim((string) config('services.openai.base_url', 'https://api.openai.com/v1'), '/');
         $model = (string) config('services.openai.model', 'gpt-5.5');
+        $maxAttempts = max(1, (int) config('services.openai.max_attempts', 3));
+        $requestTimeout = max(5, (int) config('services.openai.timeout_seconds', 30));
+        $backoffMs = max(0, (int) config('services.openai.backoff_ms', 400));
+        $prompt = $this->buildPrompt($question);
 
-        $response = Http::baseUrl($baseUrl)
-            ->withToken($apiKey)
-            ->acceptJson()
-            ->asJson()
-            ->timeout(30)
-            ->post('/responses', [
-                'model' => $model,
-                'input' => $this->buildPrompt($question),
-                'temperature' => 0,
-            ]);
+        $lastException = null;
 
-        try {
-            $response->throw();
-        } catch (ConnectionException|RequestException $exception) {
-            throw new RuntimeException('OpenAI request failed.', previous: $exception);
+        for ($attempt = 1; $attempt <= $maxAttempts; $attempt++) {
+            try {
+                $response = $this->sendRequest(
+                    baseUrl: $baseUrl,
+                    apiKey: $apiKey,
+                    model: $model,
+                    prompt: $prompt,
+                    timeoutSeconds: $requestTimeout
+                );
+
+                $grade = $this->extractGradeFromResponse($response->json());
+                if ($grade !== null) {
+                    return $grade;
+                }
+            } catch (ConnectionException|RequestException $exception) {
+                $lastException = $exception;
+            }
+
+            if ($attempt < $maxAttempts && $backoffMs > 0) {
+                usleep($backoffMs * 1000 * $attempt);
+            }
         }
 
-        return $this->extractGradeFromResponse($response->json());
+        if ($lastException !== null) {
+            throw new RuntimeException('OpenAI request failed after retries.', previous: $lastException);
+        }
+
+        return null;
     }
 
     /**
@@ -116,10 +133,43 @@ PROMPT;
 
     private function extractInt(string $value): ?int
     {
-        if (preg_match('/-?\d+/', $value, $matches) !== 1) {
+        $trimmed = trim($value);
+        if ($trimmed === '') {
             return null;
         }
 
-        return (int) $matches[0];
+        if (preg_match('/^\s*(-?\d+)\s*$/', $trimmed, $strictMatch) === 1) {
+            return (int) $strictMatch[1];
+        }
+
+        if (preg_match('/-?\d+/', $trimmed, $fallbackMatch) === 1) {
+            return (int) $fallbackMatch[0];
+        }
+
+        return null;
+    }
+
+    private function sendRequest(
+        string $baseUrl,
+        string $apiKey,
+        string $model,
+        string $prompt,
+        int $timeoutSeconds
+    ): Response {
+        $response = Http::baseUrl($baseUrl)
+            ->withToken($apiKey)
+            ->acceptJson()
+            ->asJson()
+            ->timeout($timeoutSeconds)
+            ->post('/responses', [
+                'model' => $model,
+                'input' => $prompt,
+                'temperature' => 0,
+                'max_output_tokens' => 8,
+            ]);
+
+        $response->throw();
+
+        return $response;
     }
 }

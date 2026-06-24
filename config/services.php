@@ -39,6 +39,9 @@ return [
         'key' => env('OPEN_AI_KEY'),
         'base_url' => env('OPEN_AI_BASE_URL', 'https://api.openai.com/v1'),
         'model' => env('OPEN_AI_MODEL', 'gpt-5.5'),
+        'max_attempts' => env('OPEN_AI_MAX_ATTEMPTS', 3),
+        'timeout_seconds' => env('OPEN_AI_TIMEOUT_SECONDS', 30),
+        'backoff_ms' => env('OPEN_AI_BACKOFF_MS', 400),
     ],
 
 ];
