@@ -122,6 +122,9 @@ Return JSON only with integer grades 1..10.
 
 Rules:
 - Grade each id from 1 (poor) to 10 (excellent).
+- Assume target exam is SPHR (Senior Professional in Human Resources).
+- Domain relevance is mandatory: if a question is mostly outside HR/SPHR scope, apply a severe penalty.
+- Off-topic non-HR questions should generally score 1..3 even if technically well-written.
 - Use ids exactly as provided.
 - Return all ids once.
 - No text outside JSON.
