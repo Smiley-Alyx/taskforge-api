@@ -26,37 +26,35 @@ class GradeQuestionsCommand extends Command
 
     public function handle(): int
     {
-        $questions = $this->readQuestions();
+        $questions = $this->validateQuestions($this->readQuestions());
         $results = [];
         $llmCount = 0;
         $fallbackCount = 0;
 
         $progressBar = $this->makeProgressBar(count($questions));
+        $batchSize = $this->batchSize();
 
-        foreach ($questions as $index => $question) {
-            if (! is_array($question)) {
-                throw new RuntimeException("Question at index {$index} must be an object.");
+        foreach (array_chunk($questions, $batchSize) as $chunk) {
+            $llmGrades = [];
+            try {
+                $llmGrades = $this->openAiGrader->gradeBatch($chunk);
+            } catch (Throwable) {
+                $llmGrades = [];
             }
 
-            $id = $question['id'] ?? null;
-            if (! is_string($id) || trim($id) === '') {
-                throw new RuntimeException("Question at index {$index} has an invalid id.");
+            foreach ($chunk as $question) {
+                $id = (string) $question['id'];
+
+                if (array_key_exists($id, $llmGrades)) {
+                    $results[$id] = $this->normalizeGrade($llmGrades[$id]);
+                    $llmCount++;
+                } else {
+                    $results[$id] = $this->normalizeGrade($this->heuristicGrader->grade($question));
+                    $fallbackCount++;
+                }
+
+                $progressBar?->advance();
             }
-
-            if (array_key_exists($id, $results)) {
-                throw new RuntimeException("Duplicate question id detected: {$id}.");
-            }
-
-            [$grade, $source] = $this->gradeQuestion($question);
-            $results[$id] = $grade;
-
-            if ($source === 'llm') {
-                $llmCount++;
-            } else {
-                $fallbackCount++;
-            }
-
-            $progressBar?->advance();
         }
 
         $progressBar?->finish();
@@ -118,18 +116,11 @@ class GradeQuestionsCommand extends Command
     /**
      * @param  array<string, mixed>  $question
      */
-    private function gradeQuestion(array $question): array
+    private function batchSize(): int
     {
-        try {
-            $llmGrade = $this->openAiGrader->grade($question);
-            if ($llmGrade !== null) {
-                return [$this->normalizeGrade($llmGrade), 'llm'];
-            }
-        } catch (Throwable) {
-            // Fallback to local heuristic when LLM is unavailable or fails.
-        }
+        $size = (int) config('services.openai.batch_size', 10);
 
-        return [$this->normalizeGrade($this->heuristicGrader->grade($question)), 'fallback'];
+        return max(1, min(60, $size));
     }
 
     private function makeProgressBar(int $total): ?ProgressBar
@@ -153,5 +144,35 @@ class GradeQuestionsCommand extends Command
         }
 
         return $output;
+    }
+
+    /**
+     * @param  array<int, mixed>  $questions
+     * @return array<int, array<string, mixed>>
+     */
+    private function validateQuestions(array $questions): array
+    {
+        $validated = [];
+        $seenIds = [];
+
+        foreach ($questions as $index => $question) {
+            if (! is_array($question)) {
+                throw new RuntimeException("Question at index {$index} must be an object.");
+            }
+
+            $id = $question['id'] ?? null;
+            if (! is_string($id) || trim($id) === '') {
+                throw new RuntimeException("Question at index {$index} has an invalid id.");
+            }
+
+            if (array_key_exists($id, $seenIds)) {
+                throw new RuntimeException("Duplicate question id detected: {$id}.");
+            }
+
+            $seenIds[$id] = true;
+            $validated[] = $question;
+        }
+
+        return $validated;
     }
 }

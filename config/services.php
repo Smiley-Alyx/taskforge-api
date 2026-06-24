@@ -42,6 +42,8 @@ return [
         'max_attempts' => env('OPEN_AI_MAX_ATTEMPTS', 3),
         'timeout_seconds' => env('OPEN_AI_TIMEOUT_SECONDS', 30),
         'backoff_ms' => env('OPEN_AI_BACKOFF_MS', 400),
+        'max_output_tokens' => env('OPEN_AI_MAX_OUTPUT_TOKENS', 512),
+        'batch_size' => env('OPEN_AI_BATCH_SIZE', 10),
     ],
 
 ];
