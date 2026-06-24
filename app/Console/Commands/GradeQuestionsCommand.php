@@ -3,7 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Services\HeuristicQuestionQualityGrader;
+use App\Services\OpenAiQuestionQualityGrader;
 use Illuminate\Console\Command;
+use Throwable;
 use RuntimeException;
 
 class GradeQuestionsCommand extends Command
@@ -12,8 +14,10 @@ class GradeQuestionsCommand extends Command
 
     protected $description = 'Grades exam question quality and writes grades.json';
 
-    public function __construct(private readonly HeuristicQuestionQualityGrader $grader)
-    {
+    public function __construct(
+        private readonly OpenAiQuestionQualityGrader $openAiGrader,
+        private readonly HeuristicQuestionQualityGrader $heuristicGrader
+    ) {
         parent::__construct();
     }
 
@@ -36,7 +40,7 @@ class GradeQuestionsCommand extends Command
                 throw new RuntimeException("Duplicate question id detected: {$id}.");
             }
 
-            $results[$id] = $this->normalizeGrade($this->grader->grade($question));
+            $results[$id] = $this->gradeQuestion($question);
         }
 
         $payload = ['results' => $results];
@@ -78,5 +82,22 @@ class GradeQuestionsCommand extends Command
         }
 
         return max(1, min(10, $grade));
+    }
+
+    /**
+     * @param  array<string, mixed>  $question
+     */
+    private function gradeQuestion(array $question): int
+    {
+        try {
+            $llmGrade = $this->openAiGrader->grade($question);
+            if ($llmGrade !== null) {
+                return $this->normalizeGrade($llmGrade);
+            }
+        } catch (Throwable) {
+            // Fallback to local heuristic in this milestone.
+        }
+
+        return $this->normalizeGrade($this->heuristicGrader->grade($question));
     }
 }
